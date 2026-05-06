@@ -1,0 +1,1916 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admisiones — Universidad EAFIT</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:       #000000;
+  --navy-mid:   #111111;
+  --navy-light: #1f1f1f;
+  --cyan:       #00B4D8;
+  --cyan-dark:  #0096B8;
+  --cyan-soft:  #E0F7FC;
+  --blue-soft:  #EAF1F8;
+  --blue-mid:   #BEDAEF;
+  --slate:      #4E6E97;
+  --border:     #E2E8EE;
+  --text:       #111111;
+  --muted:      #6C757D;
+  --white:      #FFFFFF;
+  --off-white:  #F8F9FA;
+  --yellow:     #FFB903;
+  --radius:     12px;
+  --radius-sm:  8px;
+  --font-body:  'Montserrat', 'Helvetica Neue', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); color: var(--text); background: var(--white); -webkit-font-smoothing: antialiased; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--off-white); }
+::-webkit-scrollbar-thumb { background: var(--navy-light); border-radius: 10px; }
+
+/* ── HEADER ── */
+.header { background: var(--navy); position: sticky; top: 0; z-index: 100; border-bottom: 2px solid var(--navy-light); }
+.header-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; height: 66px; display: flex; align-items: center; justify-content: space-between; }
+.logo-group { display: flex; align-items: center; gap: 1rem; cursor: pointer; }
+.logo-group img { height: 34px; filter: brightness(0) invert(1); }
+.logo-divider { width: 1px; height: 26px; background: rgba(255,255,255,0.18); }
+.logo-text strong { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: white; line-height: 1.2; }
+.logo-text span { font-size: 10px; color: rgba(255,255,255,0.4); }
+.header-nav { display: flex; align-items: center; gap: 0.2rem; }
+.nav-btn { background: none; border: none; color: rgba(255,255,255,0.6); font-family: var(--font-body); font-size: 14px; font-weight: 500; cursor: pointer; padding: 0.4rem 0.9rem; border-radius: 6px; transition: all 0.2s; }
+.nav-btn:hover { background: rgba(255,255,255,0.08); color: white; }
+.nav-btn.active { color: white; background: rgba(255,255,255,0.12); font-weight: 600; }
+.menu-toggle { background: none; border: none; color: white; cursor: pointer; display: flex; align-items: center; gap: 6px; padding: 0.45rem 0.6rem; transition: all 0.2s; }
+.menu-toggle:hover { opacity: 0.75; }
+.hamburger { display: flex; flex-direction: column; gap: 4px; width: 16px; }
+.hamburger span { display: block; height: 1.5px; background: white; border-radius: 2px; }
+
+/* ── SIDE MENU (nav) ── */
+.overlay { position: fixed; inset: 0; background: rgba(0,15,35,0.5); z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+.overlay.open { opacity: 1; pointer-events: all; }
+.side-menu { position: fixed; top: 0; right: 0; width: 290px; height: 100%; background: white; z-index: 201; transform: translateX(100%); transition: transform 0.32s cubic-bezier(0.4,0,0.2,1); display: flex; flex-direction: column; overflow-y: auto; }
+.side-menu.open { transform: translateX(0); }
+.side-menu-header { background: var(--navy); padding: 1.25rem 1.5rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--navy-light); flex-shrink: 0; }
+.side-menu-header span { color: white; font-weight: 600; font-size: 13px; letter-spacing: 0.04em; }
+.close-btn { background: rgba(255,255,255,0.1); border: none; border-radius: 6px; color: white; cursor: pointer; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-size: 16px; transition: background 0.2s; }
+.close-btn:hover { background: rgba(255,255,255,0.2); }
+.side-nav { padding: 1.4rem; flex: 1; }
+.side-nav-section { margin-bottom: 1.75rem; }
+.side-nav-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; display: block; }
+.side-nav-link-big { display: block; padding: 0.5rem 0; text-decoration: none; color: var(--navy); font-size: 15px; font-weight: 600; border-bottom: 1px solid var(--border); margin-bottom: 0.3rem; transition: color 0.2s; }
+.side-nav-link-big:hover { color: var(--navy-light); }
+.side-nav-link { display: flex; align-items: center; gap: 0.7rem; padding: 0.6rem 0.85rem; border-radius: var(--radius-sm); color: var(--text); font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; border: none; background: none; width: 100%; text-align: left; text-decoration: none; }
+.side-nav-link:hover { background: var(--blue-soft); color: var(--navy); }
+.side-nav-link .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--border); flex-shrink: 0; transition: background 0.2s; }
+.side-nav-link:hover .dot { background: var(--navy-light); }
+
+/* ── HELP DRAWER ── */
+.help-tab {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 300;
+  background: var(--navy-light);
+  color: white;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  padding: 1rem 0.65rem;
+  border-radius: 10px 0 0 10px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  transition: background 0.2s, right 0.35s;
+  box-shadow: -3px 0 16px rgba(0,35,71,0.15);
+}
+.help-tab:hover { background: var(--navy-mid); }
+.help-tab svg { transform: rotate(90deg); flex-shrink: 0; }
+
+.help-drawer {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%) translateX(100%);
+  z-index: 299;
+  width: 320px;
+  background: white;
+  border-radius: 14px 0 0 14px;
+  box-shadow: -6px 0 30px rgba(0,35,71,0.14);
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  max-height: 80vh;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-right: none;
+}
+.help-drawer.open {
+  transform: translateY(-50%) translateX(0);
+}
+.help-drawer-header {
+  background: var(--navy);
+  padding: 1.25rem 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 14px 0 0 0;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.help-drawer-header h3 { color: white; font-size: 14px; font-weight: 700; }
+.help-close { background: rgba(255,255,255,0.12); border: none; border-radius: 6px; color: white; cursor: pointer; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-size: 15px; transition: background 0.2s; }
+.help-close:hover { background: rgba(255,255,255,0.22); }
+.help-body { padding: 1.25rem 1.4rem; }
+.help-section { margin-bottom: 1.5rem; }
+.help-section-title { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.65rem; }
+.help-item { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.85rem 1rem; border: 1px solid var(--border); border-radius: 9px; margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s; text-decoration: none; }
+.help-item:hover { border-color: var(--navy-light); background: var(--blue-soft); }
+.help-item-icon { width: 32px; height: 32px; border-radius: 8px; background: var(--blue-soft); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+.help-item-text strong { display: block; font-size: 13.5px; font-weight: 600; color: var(--navy); margin-bottom: 2px; }
+.help-item-text span { font-size: 12px; color: var(--slate); }
+.help-divider { height: 1px; background: var(--border); margin: 1.25rem 0; }
+.help-contact { background: var(--blue-soft); border-radius: 9px; padding: 1rem 1.1rem; }
+.help-contact p { font-size: 13px; color: var(--navy); line-height: 1.6; margin-bottom: 0.75rem; }
+.help-contact-row { display: flex; align-items: center; gap: 0.5rem; font-size: 13px; color: var(--slate); margin-bottom: 0.35rem; }
+.help-contact-row strong { color: var(--navy); }
+
+/* ── PAGE SYSTEM ── */
+.page { display: none; }
+.page.active { display: block; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+.page.active > section, .page.active .hero, .page.active .main, .page.active .page-hero, .page.active .page-body { animation: fadeUp 0.32s ease both; }
+
+/* ── HERO ── */
+.hero { background: var(--navy); position: relative; overflow: hidden; padding: 4rem 2rem 3.5rem; }
+.hero::before { content: ''; position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1541339907198-e08756ebafe3?auto=format&fit=crop&q=50&w=1400') center/cover; opacity: 0.05; }
+.hero::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: var(--navy-light); }
+.hero-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+.hero-tag { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.13); color: rgba(255,255,255,0.55); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 13px; border-radius: 50px; margin-bottom: 1.4rem; }
+.hero h1 { font-size: clamp(2.6rem, 5.5vw, 4.2rem); font-weight: 700; color: white; line-height: 1.06; letter-spacing: -0.02em; margin-bottom: 0.8rem; }
+.hero h1 em { font-style: normal; font-weight: 300; color: rgba(255,255,255,0.55); }
+.hero-subtitle { font-size: 1rem; color: rgba(255,255,255,0.5); max-width: 480px; line-height: 1.65; margin-bottom: 2rem; }
+
+/* HERO SEARCH */
+.hero-search { display: flex; align-items: center; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.17); border-radius: 50px; max-width: 100%; overflow: hidden; margin-bottom: 4.5rem; transition: border-color 0.2s, background 0.2s; }
+.hero-search:focus-within { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.32); }
+.hero-search svg { margin-left: 1.1rem; color: rgba(255,255,255,0.38); flex-shrink: 0; }
+.hero-search input { flex: 1; background: none; border: none; outline: none; padding: 0.7rem 0.9rem; font-family: var(--font-body); font-size: 14px; color: white; }
+.hero-search input::placeholder { color: rgba(255,255,255,0.32); }
+.hero-search button { background: white; border: none; padding: 0.55rem 1.25rem; margin: 5px; border-radius: 50px; font-family: var(--font-body); font-size: 13px; font-weight: 700; color: var(--navy); cursor: pointer; transition: background 0.2s; white-space: nowrap; }
+.hero-search button:hover { background: var(--blue-soft); }
+.hero-actions { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+
+/* BUTTONS */
+.btn-primary { background: white; color: var(--navy); border: none; padding: 0.7rem 1.55rem; border-radius: 50px; font-family: var(--font-body); font-size: 13.5px; font-weight: 700; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; }
+.btn-primary:hover { background: var(--blue-soft); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,0,0,0.14); }
+.btn-outline { background: transparent; color: rgba(255,255,255,0.75); border: 1px solid rgba(255,255,255,0.24); padding: 0.7rem 1.55rem; border-radius: 50px; font-family: var(--font-body); font-size: 13.5px; font-weight: 500; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; }
+.btn-outline:hover { border-color: rgba(255,255,255,0.5); color: white; background: rgba(255,255,255,0.06); }
+.btn-navy { background: var(--navy); color: white; border: none; padding: 0.7rem 1.55rem; border-radius: 50px; font-family: var(--font-body); font-size: 13.5px; font-weight: 700; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; }
+.btn-navy:hover { background: var(--navy-mid); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,35,71,0.22); }
+.btn-light { background: var(--blue-soft); color: var(--navy); border: 1px solid var(--border); padding: 0.6rem 1.3rem; border-radius: 50px; font-family: var(--font-body); font-size: 13px; font-weight: 700; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; }
+.btn-light:hover { background: var(--blue-mid); transform: translateY(-1px); }
+
+/* MAIN */
+.main { max-width: 1200px; margin: 0 auto; padding: 0 2rem 5rem; }
+
+/* Stats bar */
+.stats-bar { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-top: -2rem; margin-bottom: 3.5rem; background: white; box-shadow: 0 8px 30px rgba(0,35,71,0.09); position: relative; z-index: 10; }
+.stat-item { padding: 1.4rem 1.75rem; border-right: 1px solid var(--border); transition: background 0.2s; }
+.stat-item:last-child { border-right: none; }
+.stat-item:hover { background: var(--off-white); }
+.stat-label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.3rem; }
+.stat-value { font-size: 1.55rem; font-weight: 700; color: var(--navy); line-height: 1; }
+.stat-sub { font-size: 12px; color: var(--slate); margin-top: 0.25rem; }
+
+.section { margin-bottom: 3.75rem; }
+.section-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 1.5rem; gap: 1rem; flex-wrap: wrap; }
+.section-title { font-size: 1.7rem; font-weight: 700; color: var(--navy); letter-spacing: -0.01em; }
+.section-link { font-size: 13px; font-weight: 600; color: var(--slate); text-decoration: none; transition: color 0.2s; }
+.section-link:hover { color: var(--navy); }
+
+/* ── INSCRIPCIONES CARD ── */
+.inscripciones-card { background: #000000; border-radius: var(--radius); padding: 3.25rem 3.5rem; display: flex; flex-direction: column; gap: 2rem; margin-bottom: 0; position: relative; overflow: hidden; border: 1px solid #1f1f1f; }
+.inscripciones-card::before { content: ''; position: absolute; inset: 0; background: transparent; pointer-events: none; }
+.inscripciones-top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; position: relative; z-index: 1; }
+.inscripciones-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.38); margin-bottom: 0.35rem; }
+.inscripciones-title { font-size: 1.55rem; font-weight: 700; color: white; }
+.inscripciones-subtitle { font-size: 13px; color: rgba(255,255,255,0.45); margin-top: 0.25rem; }
+.inscripciones-buttons { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1rem; position: relative; z-index: 1; }
+.ins-btn { background: #0a0a0a; border: 1px solid #1f1f1f; border-radius: var(--radius); padding: 2.75rem 2.75rem 5.5rem; cursor: pointer; transition: all 0.22s; text-align: left; display: flex; flex-direction: column; align-items: flex-start; gap: 1.4rem; min-height: 320px; position: relative; overflow: hidden; }
+.ins-btn:hover { background: #111111; border-color: var(--cyan); transform: translateY(-3px); box-shadow: 0 14px 34px rgba(0,0,0,0.35); }
+.ins-btn-content { display: flex; flex-direction: column; align-items: flex-start; gap: 1.25rem; width: 100%; min-width: 0; }
+.ins-btn-icon { width: 60px; height: 60px; border-radius: 14px; background: rgba(0,180,216,0.12); border: 1px solid rgba(0,180,216,0.25); display: flex; align-items: center; justify-content: center; color: var(--cyan); flex-shrink: 0; transition: all 0.22s; }
+.ins-btn:hover .ins-btn-icon { background: var(--cyan); color: #000; transform: scale(1.05); }
+.ins-btn-text { display: flex; flex-direction: column; align-items: flex-start; text-align: left; width: 100%; }
+.ins-btn-label { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan); margin-bottom: 8px; }
+.ins-btn-title { font-size: 2.4rem; font-weight: 700; color: white; line-height: 1.1; letter-spacing: -0.01em; }
+.ins-btn-desc { font-size: 14px; color: rgba(255,255,255,0.6); margin-top: 10px; line-height: 1.55; max-width: 90%; }
+.ins-btn-arrow { position: absolute; right: 1.75rem; bottom: 1.75rem; width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center; color: white; flex-shrink: 0; transition: all 0.22s; }
+.ins-btn:hover .ins-btn-arrow { background: var(--cyan); border-color: var(--cyan); color: #000; transform: translate(4px, -2px); }
+
+/* ── CALENDARIO FULL-WIDTH ── */
+.calendario-full {
+  background: var(--off-white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 3.75rem;
+}
+.calendario-header {
+  padding: 1.6rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  border-bottom: 1px solid var(--border);
+  background: white;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s;
+}
+.calendario-header:hover { background: var(--off-white); }
+.calendario-header-left h3 { font-size: 1.2rem; font-weight: 700; color: var(--navy); }
+.calendario-header-left p { font-size: 13px; color: var(--slate); margin-top: 2px; }
+.cal-toggle-btn {
+  display: flex; align-items: center; gap: 7px;
+  background: var(--navy); color: white; border: none;
+  padding: 0.55rem 1.2rem; border-radius: 50px;
+  font-family: var(--font-body); font-size: 13px; font-weight: 700;
+  cursor: pointer; transition: all 0.2s; pointer-events: none;
+}
+.calendario-header:hover .cal-toggle-btn { background: var(--navy-mid); }
+.cal-toggle-icon { transition: transform 0.3s; }
+.cal-toggle-icon.open { transform: rotate(180deg); }
+
+.calendario-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.45s ease;
+}
+.calendario-body.open { max-height: 2000px; }
+.calendario-body-inner { padding: 1.75rem 2rem; }
+
+.cal-tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.cal-tab { padding: 0.45rem 1.1rem; border-radius: 50px; border: 1px solid var(--border); background: white; font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--slate); cursor: pointer; transition: all 0.2s; }
+.cal-tab.active { background: var(--navy); color: white; border-color: var(--navy); }
+
+.cal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.cal-event { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 1.15rem 1.3rem; transition: all 0.2s; border-left: 3px solid var(--navy-light); }
+.cal-event:hover { box-shadow: 0 4px 14px rgba(0,35,71,0.08); transform: translateY(-1px); }
+.cal-event-date { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--navy-light); margin-bottom: 4px; }
+.cal-event-title { font-size: 14px; font-weight: 600; color: var(--navy); line-height: 1.35; margin-bottom: 4px; }
+.cal-event-desc { font-size: 12px; color: var(--slate); line-height: 1.5; }
+.cal-event.highlight { border-left-color: var(--navy); background: var(--blue-soft); }
+
+/* Cards */
+.card-grid { display: grid; gap: 1rem; }
+.card-grid-2 { grid-template-columns: repeat(2, 1fr); }
+.card-grid-3 { grid-template-columns: repeat(3, 1fr); }
+.card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.6rem; transition: all 0.2s; cursor: pointer; }
+.card:hover { border-color: var(--navy-light); box-shadow: 0 6px 20px rgba(0,35,71,0.08); transform: translateY(-2px); }
+.card-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.45rem; }
+.card-title { font-size: 1rem; font-weight: 600; color: var(--navy); margin-bottom: 0.45rem; line-height: 1.3; }
+.card-desc { font-size: 13px; color: var(--slate); line-height: 1.6; margin-bottom: 1.1rem; }
+.card-action { font-size: 12px; font-weight: 700; color: var(--navy-light); letter-spacing: 0.06em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 4px; text-decoration: none; transition: gap 0.2s; }
+.card:hover .card-action { gap: 8px; }
+.card-icon { width: 40px; height: 40px; border-radius: 9px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.1rem; font-size: 18px; background: var(--blue-soft); }
+
+/* Tabs */
+.tabs { display: flex; background: var(--off-white); border: 1px solid var(--border); border-radius: 50px; padding: 3px; gap: 2px; }
+.tab-btn { padding: 0.45rem 1.2rem; border-radius: 50px; border: none; background: transparent; font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--slate); cursor: pointer; transition: all 0.2s; }
+.tab-btn.active { background: var(--navy); color: white; box-shadow: 0 2px 8px rgba(0,35,71,0.18); }
+
+/* Search bar */
+.search-bar { position: relative; flex: 1; }
+.search-bar input { width: 100%; padding: 0.72rem 1rem 0.72rem 2.5rem; border: 1px solid var(--border); border-radius: 50px; font-family: var(--font-body); font-size: 13.5px; color: var(--text); background: white; outline: none; transition: border-color 0.2s; }
+.search-bar input:focus { border-color: var(--navy-light); }
+.search-bar svg { position: absolute; left: 0.85rem; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+
+/* Tramites */
+.tramites-container { background: white; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.tramites-toolbar { padding: 1.1rem 1.4rem; background: var(--off-white); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.tramites-grid { padding: 1.4rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.9rem; }
+.tramite-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.3rem; transition: all 0.2s; cursor: pointer; }
+.tramite-card:hover { border-color: var(--navy-light); box-shadow: 0 5px 14px rgba(0,35,71,0.08); transform: translateY(-2px); }
+.tramite-type { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy-light); margin-bottom: 0.4rem; }
+.tramite-title { font-size: 13.5px; font-weight: 600; color: var(--navy); margin-bottom: 1.1rem; line-height: 1.4; min-height: 2.6rem; }
+.tramite-link { font-size: 11px; font-weight: 800; color: var(--navy-light); letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; display: flex; align-items: center; gap: 4px; transition: gap 0.2s; }
+.tramite-card:hover .tramite-link { gap: 8px; }
+
+/* ── INNER PAGE HERO ── */
+.page-hero { background: var(--navy); padding: 3.5rem 2rem 4.25rem; position: relative; overflow: hidden; }
+.page-hero::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: var(--navy-light); }
+.page-hero-inner { max-width: 1200px; margin: 0 auto; }
+.breadcrumb { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.9rem; font-size: 12px; color: rgba(255,255,255,0.38); }
+.breadcrumb a { color: rgba(255,255,255,0.38); text-decoration: none; cursor: pointer; transition: color 0.2s; }
+.breadcrumb a:hover { color: white; }
+.breadcrumb span { color: rgba(255,255,255,0.38); }
+.page-hero h2 { font-size: clamp(1.9rem,4vw,2.9rem); font-weight: 700; color: white; }
+.page-hero p { color: rgba(255,255,255,0.48); margin-top: 0.6rem; font-size: 15px; }
+.page-body { max-width: 1200px; margin: 0 auto; padding: 2.75rem 2rem 5rem; }
+
+/* Steps */
+.step-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); }
+.step-item { background: white; padding: 1.3rem 1.55rem; display: flex; gap: 1.1rem; align-items: flex-start; transition: background 0.2s; }
+.step-item:hover { background: var(--off-white); }
+.step-num { width: 32px; height: 32px; border-radius: 50%; background: var(--navy); color: white; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.step-content { flex: 1; }
+.step-title { font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 0.2rem; }
+.step-desc { font-size: 13px; color: var(--slate); line-height: 1.6; }
+.step-badge { font-size: 10px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; padding: 3px 9px; border-radius: 50px; background: var(--blue-soft); color: var(--navy-light); flex-shrink: 0; margin-top: 3px; }
+
+/* Info boxes */
+.info-box { background: var(--off-white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.3rem; }
+.info-box-title { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 0.65rem; display: flex; align-items: center; gap: 0.4rem; }
+.info-box ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+.info-box ul li { font-size: 13px; color: var(--slate); display: flex; gap: 0.5rem; }
+.info-box ul li::before { content: '—'; color: var(--muted); flex-shrink: 0; }
+
+/* ── PROGRAM PAGES ── */
+.prog-layout { display: flex; gap: 2rem; align-items: flex-start; flex-wrap: wrap; margin-bottom: 2.5rem; }
+.prog-info-box {
+  flex: 0 0 280px;
+  background: var(--navy);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  color: white;
+  position: sticky;
+  top: 86px;
+}
+.prog-info-box .pib-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.38); margin-bottom: 0.4rem; }
+.prog-info-box .pib-title { font-size: 1.45rem; font-weight: 700; color: white; margin-bottom: 0.75rem; line-height: 1.2; }
+.prog-info-box .pib-desc { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.7; margin-bottom: 1.25rem; }
+.pib-stat { display: flex; align-items: center; gap: 0.6rem; padding: 0.65rem 0; border-top: 1px solid rgba(255,255,255,0.1); font-size: 13px; color: rgba(255,255,255,0.7); }
+.pib-stat strong { color: white; font-weight: 600; margin-left: auto; }
+.pib-cta { margin-top: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; }
+
+.prog-right { flex: 1; min-width: 280px; }
+
+/* Program search + filters */
+.prog-search-bar {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.4rem;
+  margin-bottom: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+.prog-search-bar .search-bar { min-width: 220px; }
+.prog-filter-select {
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--text);
+  background: white;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  min-width: 170px;
+}
+.prog-filter-select:focus { border-color: var(--navy-light); }
+.prog-filter-btn {
+  background: var(--navy); color: white; border: none;
+  padding: 0.6rem 1.25rem; border-radius: 50px;
+  font-family: var(--font-body); font-size: 13px; font-weight: 700;
+  cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 5px;
+  white-space: nowrap;
+}
+.prog-filter-btn:hover { background: var(--navy-mid); }
+
+/* Program grid */
+.prog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.prog-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.4rem;
+  display: flex; flex-direction: column;
+  transition: all 0.2s;
+}
+.prog-card:hover { border-color: var(--navy-light); box-shadow: 0 6px 20px rgba(0,35,71,0.09); transform: translateY(-2px); }
+.prog-card-area { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy-light); margin-bottom: 0.45rem; }
+.prog-card-title { font-size: 14.5px; font-weight: 700; color: var(--navy); line-height: 1.35; margin-bottom: 0.85rem; flex: 1; }
+.prog-card-meta { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1.1rem; }
+.prog-meta-item { display: flex; align-items: center; gap: 0.45rem; font-size: 12px; color: var(--slate); }
+.prog-meta-item svg { flex-shrink: 0; color: var(--muted); }
+.prog-card-btn {
+  width: 100%; padding: 0.6rem 1rem; border-radius: 8px;
+  background: var(--blue-soft); color: var(--navy);
+  border: 1px solid var(--border); font-family: var(--font-body);
+  font-size: 12.5px; font-weight: 700; cursor: pointer;
+  transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 5px;
+}
+.prog-card-btn:hover { background: var(--navy); color: white; border-color: var(--navy); }
+.no-results { grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--muted); font-size: 15px; }
+
+/* Forms */
+.form-group { margin-bottom: 1.1rem; }
+.form-label { display: block; font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 0.45rem; }
+.form-control { width: 100%; padding: 0.72rem 1rem; border: 1.5px solid var(--border); border-radius: 9px; font-family: var(--font-body); font-size: 14px; color: var(--text); background: white; outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
+.form-control:focus { border-color: var(--navy-light); box-shadow: 0 0 0 3px rgba(0,79,150,0.08); }
+textarea.form-control { resize: vertical; min-height: 110px; }
+.form-submit { width: 100%; padding: 0.88rem; background: var(--navy); color: white; border: none; border-radius: 9px; font-family: var(--font-body); font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 0.6rem; }
+.form-submit:hover { background: var(--navy-mid); transform: translateY(-1px); box-shadow: 0 6px 18px rgba(0,35,71,0.2); }
+.success-msg { display: none; background: #E8F5E9; border: 1px solid #A5D6A7; color: #2E7D32; border-radius: 9px; padding: 0.9rem 1.1rem; font-size: 14px; font-weight: 600; margin-top: 0.9rem; text-align: center; }
+.contact-aside { background: var(--navy); border-radius: var(--radius); padding: 1.75rem; color: white; }
+.contact-aside h3 { font-size: 15px; font-weight: 600; margin-bottom: 1.25rem; padding-bottom: 0.9rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.contact-item { display: flex; gap: 0.7rem; margin-bottom: 1.05rem; align-items: flex-start; }
+.contact-item-icon { width: 30px; height: 30px; background: rgba(255,255,255,0.09); border-radius: 7px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 13px; }
+.contact-item-text { font-size: 13px; color: rgba(255,255,255,0.72); }
+.contact-item-text strong { display: block; color: rgba(255,255,255,0.36); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 2px; }
+
+/* ── FLOATING BUTTONS ── */
+.fab-stack { position: fixed; bottom: 2rem; right: 1.75rem; display: flex; flex-direction: column; gap: 0.7rem; z-index: 500; }
+.fab-btn { width: 48px; height: 48px; border-radius: 50%; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(0,0,0,0.2); transition: transform 0.2s, box-shadow 0.2s; position: relative; }
+.fab-btn:hover { transform: translateY(-2px) scale(1.07); box-shadow: 0 8px 22px rgba(0,0,0,0.24); }
+.fab-btn:hover .fab-tooltip { opacity: 1; transform: translateX(0); }
+.fab-wa { background: #25D366; }
+.fab-acc { background: var(--navy); }
+.fab-tr { background: var(--navy-mid); }
+.fab-tooltip { position: absolute; right: calc(100% + 10px); background: var(--navy); color: white; font-size: 12px; font-weight: 600; padding: 5px 10px; border-radius: 6px; white-space: nowrap; opacity: 0; pointer-events: none; transform: translateX(5px); transition: opacity 0.2s, transform 0.2s; }
+.fab-tooltip::after { content: ''; position: absolute; right: -5px; top: 50%; transform: translateY(-50%); border: 5px solid transparent; border-right: none; border-left-color: var(--navy); }
+
+/* Footer */
+.footer { background: var(--off-white); border-top: 1px solid var(--border); padding: 3.75rem 2rem 2rem; }
+.footer-inner { max-width: 1200px; margin: 0 auto; }
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 2.75rem; margin-bottom: 2.75rem; }
+.footer-logo img { height: 36px; margin-bottom: 1.1rem; }
+.footer-address { font-size: 13px; color: var(--slate); line-height: 1.85; }
+.footer-heading { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--navy); margin-bottom: 1.1rem; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+.footer-links a { font-size: 13px; color: var(--slate); text-decoration: none; transition: color 0.2s; cursor: pointer; }
+.footer-links a:hover { color: var(--navy); }
+.social-row { display: flex; gap: 0.45rem; margin-bottom: 1.1rem; }
+.social-btn { width: 34px; height: 34px; border-radius: 50%; background: white; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 10.5px; font-weight: 700; color: var(--navy); cursor: pointer; transition: all 0.2s; text-decoration: none; }
+.social-btn:hover { background: var(--navy); color: white; border-color: var(--navy); }
+.footer-bottom { padding-top: 1.4rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+.footer-legal { font-size: 11px; color: var(--muted); display: flex; gap: 1.25rem; flex-wrap: wrap; }
+.footer-legal a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.footer-legal a:hover { color: var(--navy); }
+.footer-copy { font-size: 11px; color: var(--muted); }
+
+/* ── USER TYPE SELECTOR ── */
+.user-type-selector { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.1rem; margin-top: 3.5rem; padding-top: 2.5rem; border-top: 1px solid rgba(255,255,255,0.08); margin-bottom: 0; position: relative; }
+.user-type-selector::before { content: 'Continúa según tu perfil'; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--navy); padding: 0 14px; font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan); }
+.utc { border: 2px solid rgba(255,255,255,0.15); border-radius: var(--radius); padding: 1.6rem 1.4rem; cursor: pointer; transition: all 0.22s; background: rgba(255,255,255,0.07); text-align: left; width: 100%; }
+.utc:hover { border-color: rgba(255,255,255,0.38); background: rgba(255,255,255,0.13); transform: translateY(-2px); }
+.utc.selected { border-color: rgba(255,255,255,0.65); background: rgba(255,255,255,0.18); }
+.utc-icon { width: 44px; height: 44px; border-radius: 11px; background: rgba(0,180,216,0.12); border: 1px solid rgba(0,180,216,0.25); display: flex; align-items: center; justify-content: center; color: var(--cyan); margin-bottom: 0.9rem; transition: all 0.22s; }
+.utc-icon svg { width: 22px; height: 22px; stroke-width: 1.8; }
+.utc:hover .utc-icon { background: var(--cyan); color: #000; }
+.utc-title { font-size: 1.05rem; font-weight: 700; color: white; margin-bottom: 0.4rem; display: block; }
+.utc-desc { font-size: 12.5px; color: rgba(255,255,255,0.52); line-height: 1.6; }
+
+/* SUB-TYPE SELECTOR (Estudiante Activo) */
+.subtype-selector { display: none; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; margin-bottom: 0; }
+.subtype-selector.visible { display: grid; animation: fadeUp 0.28s ease both; }
+.stc { border: 1.5px solid rgba(255,255,255,0.15); border-radius: var(--radius); padding: 1.35rem 1.5rem; cursor: pointer; transition: all 0.2s; background: rgba(255,255,255,0.07); text-align: left; width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.stc:hover { border-color: rgba(255,255,255,0.38); background: rgba(255,255,255,0.13); transform: translateY(-1px); }
+.stc-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 3px; }
+.stc-title { font-size: 1.05rem; font-weight: 700; color: white; }
+.stc-desc { font-size: 12px; color: rgba(255,255,255,0.52); margin-top: 2px; line-height: 1.5; }
+
+/* ── ACERCA DE LAYOUT ── */
+.acerca-layout { display: grid; grid-template-columns: 1.35fr 1fr; gap: 2rem; }
+
+/* ── INS-BTN enlarged ── */
+
+/* ── TRAMITE MODAL ── */
+.tramite-overlay { position: fixed; inset: 0; background: rgba(0,15,35,0.5); z-index: 400; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+.tramite-overlay.open { opacity: 1; pointer-events: all; }
+.tramite-modal { position: fixed; bottom: 0; left: 0; right: 0; background: white; z-index: 401; border-radius: 20px 20px 0 0; max-height: 88vh; overflow-y: auto; transform: translateY(100%); transition: transform 0.38s cubic-bezier(0.4,0,0.2,1); }
+.tramite-modal.open { transform: translateY(0); }
+.tramite-modal-header { background: var(--navy); padding: 1.5rem 1.75rem; display: flex; align-items: center; justify-content: space-between; border-radius: 20px 20px 0 0; position: sticky; top: 0; z-index: 1; }
+.tramite-modal-type { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 4px; }
+.tramite-modal-title { font-size: 1.25rem; font-weight: 700; color: white; }
+.tramite-modal-close { background: rgba(255,255,255,0.12); border: none; border-radius: 8px; color: white; cursor: pointer; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; font-size: 17px; transition: background 0.2s; flex-shrink: 0; }
+.tramite-modal-close:hover { background: rgba(255,255,255,0.22); }
+.tramite-modal-body { padding: 1.75rem; max-width: 780px; margin: 0 auto; }
+.tramite-modal-desc { font-size: 15px; color: var(--text); line-height: 1.75; margin-bottom: 1.75rem; }
+.tramite-steps-title { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
+.tramite-steps { display: flex; flex-direction: column; gap: 1px; background: var(--border); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); margin-bottom: 1.5rem; }
+.tramite-step { background: white; padding: 1.1rem 1.4rem; display: flex; gap: 1rem; align-items: flex-start; }
+.tramite-step-num { width: 28px; height: 28px; border-radius: 50%; background: var(--navy); color: white; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+.tramite-step-text strong { display: block; font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 2px; }
+.tramite-step-text span { font-size: 13px; color: var(--slate); line-height: 1.55; }
+.tramite-modal-footer { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+/* tramite-card clickable */
+.tramite-card { cursor: pointer; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .prog-layout { flex-direction: column; }
+  .prog-info-box { flex: none; width: 100%; position: static; }
+  .prog-grid { grid-template-columns: repeat(2, 1fr); }
+  .cal-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .stats-bar { grid-template-columns: 1fr; }
+  .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+  .stat-item:last-child { border-bottom: none; }
+  .card-grid-2, .card-grid-3 { grid-template-columns: 1fr; }
+  .tramites-grid, .prog-grid, .cal-grid { grid-template-columns: 1fr; }
+  .inscripciones-buttons { grid-template-columns: 1fr; }
+  .ins-btn { padding: 2rem 1.75rem 4.75rem; min-height: 260px; }
+  .ins-btn-title { font-size: 1.85rem; }
+  .ins-btn-icon { width: 52px; height: 52px; }
+  .ins-btn-icon svg { width: 26px; height: 26px; }
+  .ins-btn-arrow { right: 1.25rem; bottom: 1.25rem; width: 42px; height: 42px; }
+  .ins-btn-desc { max-width: 100%; }
+  .ins-btn-desc { font-size: 13px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .header-nav { display: none; }
+  .fab-stack { bottom: 1.25rem; right: 1rem; }
+  .help-drawer { width: 290px; }
+  .help-tab { display: none; }
+  .user-type-selector { grid-template-columns: 1fr; }
+  .subtype-selector { grid-template-columns: 1fr; }
+  .tramite-modal { border-radius: 16px 16px 0 0; }
+  .tramite-modal-body { padding: 1.25rem; }
+  .acerca-layout { grid-template-columns: 1fr; }
+  .acerca-info-sub { grid-template-columns: 1fr !important; }
+}
+@media (max-width: 600px) {
+  .acerca-stats { grid-template-columns: 1fr !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- OVERLAY (nav menu) -->
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+<!-- NAV SIDE MENU -->
+<aside class="side-menu" id="sideMenu">
+  <div class="side-menu-header">
+    <span>Menú</span>
+    <button class="close-btn" onclick="closeMenu()">✕</button>
+  </div>
+  <div class="side-nav">
+    <div class="side-nav-section">
+      <span class="side-nav-label">Inscripciones</span>
+      <button class="side-nav-link" onclick="gotoPage('inscripcion'); closeMenu()"><span class="dot"></span>Inscripción y matrícula</button>
+      <button class="side-nav-link" onclick="gotoPage('pregrado'); closeMenu()"><span class="dot"></span>Programas de Pregrado</button>
+      <button class="side-nav-link" onclick="gotoPage('posgrado'); closeMenu()"><span class="dot"></span>Programas de Posgrado</button>
+    </div>
+    <div class="side-nav-section">
+      <span class="side-nav-label">Trámites y Certificados</span>
+      <button class="side-nav-link" onclick="gotoPage('tramites'); closeMenu()"><span class="dot"></span>Todos los trámites</button>
+      <button class="side-nav-link" onclick="gotoPage('tramites'); closeMenu()"><span class="dot"></span>Certificados académicos</button>
+      <button class="side-nav-link" onclick="gotoPage('tramites'); closeMenu()"><span class="dot"></span>Solicitudes en línea</button>
+    </div>
+    <div class="side-nav-section">
+      <span class="side-nav-label">Ayuda</span>
+      <button class="side-nav-link" onclick="gotoPage('contacto'); closeMenu()"><span class="dot"></span>Contacto y consultas</button>
+      <button class="side-nav-link" onclick="gotoPage('home'); closeMenu()"><span class="dot"></span>Inicio</button>
+      <a class="side-nav-link" href="#"><span class="dot"></span>Centro de Ayuda</a>
+    </div>
+  </div>
+</aside>
+
+<!-- HELP DRAWER TAB -->
+<button class="help-tab" id="helpTab" onclick="toggleHelp()">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17" stroke-width="3" stroke-linecap="round"/></svg>
+  Ayuda
+</button>
+
+<!-- HELP DRAWER -->
+<aside class="help-drawer" id="helpDrawer">
+  <div class="help-drawer-header">
+    <h3>Centro de ayuda</h3>
+    <button class="help-close" onclick="toggleHelp()">✕</button>
+  </div>
+  <div class="help-body">
+    <div class="help-section">
+      <p class="help-section-title">Accesos rápidos</p>
+      <a class="help-item" onclick="gotoPage('inscripcion'); toggleHelp()">
+        <div class="help-item-icon">📝</div>
+        <div class="help-item-text">
+          <strong>Proceso de inscripción</strong>
+          <span>Pasos para inscribirte al programa</span>
+        </div>
+      </a>
+      <a class="help-item" onclick="gotoPage('tramites'); toggleHelp()">
+        <div class="help-item-icon">📄</div>
+        <div class="help-item-text">
+          <strong>Trámites y certificados</strong>
+          <span>Solicita documentos en línea</span>
+        </div>
+      </a>
+      <a class="help-item" href="#">
+        <div class="help-item-icon">📅</div>
+        <div class="help-item-text">
+          <strong>Calendario académico</strong>
+          <span>Fechas y eventos del período 2026</span>
+        </div>
+      </a>
+      <a class="help-item" href="#">
+        <div class="help-item-icon">💰</div>
+        <div class="help-item-text">
+          <strong>Tarifas y costos</strong>
+          <span>Derechos de inscripción y matrícula</span>
+        </div>
+      </a>
+      <a class="help-item" href="#">
+        <div class="help-item-icon">🎓</div>
+        <div class="help-item-text">
+          <strong>Financiación y becas</strong>
+          <span>Opciones de apoyo económico</span>
+        </div>
+      </a>
+    </div>
+    <div class="help-divider"></div>
+    <div class="help-section">
+      <p class="help-section-title">Contacto directo</p>
+      <div class="help-contact">
+        <p>¿No encontraste lo que buscabas? Contáctanos.</p>
+        <div class="help-contact-row"><span>📞</span><span>PBX: <strong>+57 (604) 261 9500</strong></span></div>
+        <div class="help-contact-row"><span>💬</span><span>WhatsApp: <strong>+57 300 000 0000</strong></span></div>
+        <div class="help-contact-row"><span>🕐</span><span>Lun–Vie <strong>8:00 am – 5:00 pm</strong></span></div>
+        <div style="margin-top:1rem;">
+          <button class="btn-navy" style="width:100%; justify-content:center; font-size:13px;" onclick="gotoPage('contacto'); toggleHelp()">Enviar consulta →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <div class="logo-group" onclick="gotoPage('home')">
+      <img src="https://www.eafit.edu.co/sites/default/files/logo_EAFIT_negro.svg" alt="EAFIT">
+      <div class="logo-divider"></div>
+      <div class="logo-text">
+        <strong>Admisiones</strong>
+        <span>Información para ti</span>
+      </div>
+    </div>
+    <button class="menu-toggle" onclick="openMenu()">
+      <div class="hamburger"><span></span><span></span><span></span></div>
+    </button>
+  </div>
+</header>
+
+<!-- ════════════════════ HOME ════════════════════ -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>Admisiones</h1>
+      <p class="hero-subtitle">Tu proceso de ingreso y gestión académica centralizado. Toda la información para ser parte de la comunidad EAFITense.</p>
+      <div class="hero-search">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="heroSearch" placeholder="Busca un trámite, programa o proceso..." onkeydown="if(event.key==='Enter') heroSearchGo()">
+        <button onclick="heroSearchGo()">Buscar</button>
+      </div>
+
+      <!-- USER TYPE SELECTOR -->
+      <div class="user-type-selector">
+        <button class="utc" id="utc-estudiante" onclick="selectUserType('estudiante-activo', this)">
+          <span class="utc-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </span>
+          <span class="utc-title">Estudiante Activo</span>
+          <p class="utc-desc">Ya soy estudiante EAFIT. Necesito consultar trámites, certificados o programas de posgrado.</p>
+        </button>
+        <button class="utc" id="utc-aspirante-pre" onclick="selectUserType('aspirante-pregrado', this)">
+          <span class="utc-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </span>
+          <span class="utc-title">Aspirante a Pregrado</span>
+          <p class="utc-desc">Quiero ingresar a EAFIT y conocer los programas de pregrado disponibles.</p>
+        </button>
+        <button class="utc" id="utc-aspirante-pos" onclick="selectUserType('aspirante-posgrado', this)">
+          <span class="utc-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/></svg>
+          </span>
+          <span class="utc-title">Aspirante a Posgrado</span>
+          <p class="utc-desc">Busco especializaciones, maestrías o doctorados en la Universidad EAFIT.</p>
+        </button>
+      </div>
+
+      <!-- SUBTYPE (Estudiante Activo) -->
+      <div class="subtype-selector" id="subtypeSelector">
+        <button class="stc" onclick="gotoPage('tramites')">
+          <div>
+            <p class="stc-label">Soy estudiante de</p>
+            <p class="stc-title">Pregrado</p>
+            <p class="stc-desc">Consultar trámites y certificados académicos</p>
+          </div>
+          <div class="ins-btn-arrow"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </button>
+        <button class="stc" onclick="gotoPage('posgrado')">
+          <div>
+            <p class="stc-label">Soy estudiante de</p>
+            <p class="stc-title">Posgrado</p>
+            <p class="stc-desc">Ver maestrías y programas de posgrado disponibles</p>
+          </div>
+          <div class="ins-btn-arrow"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <div class="main">
+
+    <!-- INSCRIPCIONES -->
+    <div class="inscripciones-card" style="margin-top: 2.5rem;">
+      <div class="inscripciones-top">
+        <div>
+          <p class="inscripciones-label">Convocatoria abierta · 2026</p>
+          <h3 class="inscripciones-title">Inscripciones</h3>
+          <p class="inscripciones-subtitle">Selecciona tu nivel de formación para comenzar</p>
+        </div>
+        <div style="font-size:12px; color:rgba(255,255,255,0.32); text-align:right; line-height:1.65;">
+          Cierre de inscripciones<br><strong style="color:rgba(255,255,255,0.65); font-size:14px;">30 de agosto · 2026</strong>
+        </div>
+      </div>
+      <div class="inscripciones-buttons">
+        <button class="ins-btn" onclick="gotoPage('pregrado')">
+          <div class="ins-btn-content">
+            <div class="ins-btn-icon">
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            </div>
+            <div class="ins-btn-text">
+              <p class="ins-btn-label">Nivel de formación</p>
+              <p class="ins-btn-title">Pregrado</p>
+              <p class="ins-btn-desc">Ingenierías, Humanidades, Administración y más programas profesionales.</p>
+            </div>
+          </div>
+          <div class="ins-btn-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </button>
+        <button class="ins-btn" onclick="gotoPage('posgrado')">
+          <div class="ins-btn-content">
+            <div class="ins-btn-icon">
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/></svg>
+            </div>
+            <div class="ins-btn-text">
+              <p class="ins-btn-label">Nivel de formación</p>
+              <p class="ins-btn-title">Posgrado</p>
+              <p class="ins-btn-desc">Especializaciones, maestrías y doctorados con énfasis en investigación.</p>
+            </div>
+          </div>
+          <div class="ins-btn-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </button>
+      </div>
+    </div>
+
+    <!-- CALENDARIO FULL-WIDTH (expandable) -->
+    <div class="calendario-full" style="border-radius: 0 0 var(--radius) var(--radius); border-top: none; margin-bottom: 3.75rem;">
+      <div class="calendario-header" onclick="toggleCal()">
+        <div class="calendario-header-left">
+          <h3>Calendario Académico 2026</h3>
+          <p>Fechas clave, períodos y eventos del ciclo académico</p>
+        </div>
+        <button class="cal-toggle-btn">
+          Ver calendario completo
+          <svg class="cal-toggle-icon" id="calIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </div>
+      <div class="calendario-body" id="calBody">
+        <div class="calendario-body-inner">
+          <div class="cal-tabs">
+            <button class="cal-tab active" onclick="filterCal('todos', this)">Todos</button>
+            <button class="cal-tab" onclick="filterCal('pregrado', this)">Pregrado</button>
+            <button class="cal-tab" onclick="filterCal('posgrado', this)">Posgrado</button>
+            <button class="cal-tab" onclick="filterCal('administrativo', this)">Administrativo</button>
+          </div>
+          <div class="cal-grid" id="calGrid">
+            <div class="cal-event highlight" data-cal="pregrado"><p class="cal-event-date">1 – 30 Julio · 2026</p><p class="cal-event-title">Inscripciones pregrado abiertas</p><p class="cal-event-desc">Período de inscripción para todos los programas de pregrado del período 2026-2.</p></div>
+            <div class="cal-event" data-cal="pregrado"><p class="cal-event-date">15 – 31 Agosto · 2026</p><p class="cal-event-title">Exámenes de admisión pregrado</p><p class="cal-event-desc">Realización del examen de admisión para aspirantes inscritos. Fecha asignada por programa.</p></div>
+            <div class="cal-event" data-cal="pregrado"><p class="cal-event-date">15 Septiembre · 2026</p><p class="cal-event-title">Publicación de resultados</p><p class="cal-event-desc">Divulgación de listas de admitidos en todos los programas de pregrado.</p></div>
+            <div class="cal-event highlight" data-cal="posgrado"><p class="cal-event-date">1 – 15 Julio · 2026</p><p class="cal-event-title">Inscripciones posgrado abiertas</p><p class="cal-event-desc">Período de inscripción para especializaciones, maestrías y doctorados.</p></div>
+            <div class="cal-event" data-cal="posgrado"><p class="cal-event-date">20 – 31 Agosto · 2026</p><p class="cal-event-title">Entrevistas de admisión posgrado</p><p class="cal-event-desc">Entrevistas con directores de programa para candidatos preseleccionados.</p></div>
+            <div class="cal-event" data-cal="posgrado"><p class="cal-event-date">10 Septiembre · 2026</p><p class="cal-event-title">Resultados posgrado</p><p class="cal-event-desc">Notificación de admitidos a programas de posgrado por correo institucional.</p></div>
+            <div class="cal-event" data-cal="administrativo"><p class="cal-event-date">1 – 15 Octubre · 2026</p><p class="cal-event-title">Matrícula académica</p><p class="cal-event-desc">Selección de asignaturas y formalización de la matrícula para el período 2026-2.</p></div>
+            <div class="cal-event" data-cal="administrativo"><p class="cal-event-date">16 – 30 Octubre · 2026</p><p class="cal-event-title">Matrícula financiera</p><p class="cal-event-desc">Pago de derechos de matrícula y servicios académicos del período.</p></div>
+            <div class="cal-event" data-cal="administrativo"><p class="cal-event-date">3 Noviembre · 2026</p><p class="cal-event-title">Inicio de clases</p><p class="cal-event-desc">Comienzo oficial del período académico 2026-2 para todos los programas.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Acerca de -->
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">Acerca de</h2>
+        <span class="section-link">Admisiones y Registro — EAFIT</span>
+      </div>
+      <div class="acerca-layout">
+
+        <!-- Bloque institucional -->
+        <div style="display:flex; flex-direction:column; gap:1.5rem;">
+          <div class="card" style="cursor:default;">
+            <p class="card-tag">¿Qué es la Oficina de Admisiones y Registro?</p>
+            <p class="card-title" style="font-size:1.15rem; margin-bottom:0.75rem;">Gestión integral del ciclo académico</p>
+            <p class="card-desc" style="margin-bottom:0; font-size:14px; line-height:1.75;">La Oficina de Admisiones y Registro de la Universidad EAFIT es la dependencia encargada de gestionar todos los procesos relacionados con el ingreso, permanencia y graduación de los estudiantes. Coordina las inscripciones a programas de pregrado y posgrado, administra el registro académico y garantiza la integridad de la información educativa de cada estudiante a lo largo de su trayectoria universitaria.</p>
+          </div>
+          <div class="acerca-info-sub" style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+            <div class="info-box">
+              <p class="info-box-title">📋 Nuestros servicios</p>
+              <ul>
+                <li>Inscripción y admisión</li>
+                <li>Registro académico</li>
+                <li>Certificados y constancias</li>
+                <li>Trámites estudiantiles</li>
+                <li>Grados y diplomas</li>
+              </ul>
+            </div>
+            <div class="info-box">
+              <p class="info-box-title">🕐 Atención presencial</p>
+              <ul>
+                <li>Lun — Vie · 8:00 am – 5:00 pm</li>
+                <li>Bloque 26, Piso 1</li>
+                <li>Campus EAFIT, Medellín</li>
+                <li>admisiones.registro@eafit.edu.co</li>
+                <li>PBX: +57 (604) 261 9500</li>
+              </ul>
+            </div>
+          </div>
+          <div class="acerca-stats" style="display:grid; grid-template-columns:repeat(3,1fr); gap:1rem;">
+            <div style="background:var(--navy); border-radius:var(--radius); padding:1.25rem; text-align:center;">
+              <p style="font-size:1.8rem; font-weight:700; color:white; line-height:1;">24+</p>
+              <p style="font-size:11px; color:rgba(255,255,255,0.5); margin-top:4px; font-weight:600; letter-spacing:0.07em; text-transform:uppercase;">Trámites en línea</p>
+            </div>
+            <div style="background:var(--navy); border-radius:var(--radius); padding:1.25rem; text-align:center;">
+              <p style="font-size:1.8rem; font-weight:700; color:white; line-height:1;">2026-1</p>
+              <p style="font-size:11px; color:rgba(255,255,255,0.5); margin-top:4px; font-weight:600; letter-spacing:0.07em; text-transform:uppercase;">Período activo</p>
+            </div>
+            <div style="background:var(--navy); border-radius:var(--radius); padding:1.25rem; text-align:center;">
+              <p style="font-size:1.8rem; font-weight:700; color:white; line-height:1;">40+</p>
+              <p style="font-size:11px; color:rgba(255,255,255,0.5); margin-top:4px; font-weight:600; letter-spacing:0.07em; text-transform:uppercase;">Programas</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Formulario de contacto -->
+        <div class="card" style="cursor:default; padding:2rem;">
+          <p class="card-tag">Formulario de contacto</p>
+          <p class="card-title" style="font-size:1.1rem; margin-bottom:1.4rem;">Escríbenos directamente</p>
+          <form id="acercaForm">
+            <div class="form-group">
+              <label class="form-label">Nombre completo *</label>
+              <input class="form-control" type="text" id="acNombre" placeholder="Tu nombre completo" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Correo electrónico *</label>
+              <input class="form-control" type="email" id="acEmail" placeholder="nombre@ejemplo.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Teléfono</label>
+              <input class="form-control" type="tel" id="acTel" placeholder="+57 300 000 0000">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Tema de consulta *</label>
+              <select class="form-control" id="acTema" required>
+                <option value="">Selecciona un tema...</option>
+                <option>Proceso de inscripción</option>
+                <option>Requisitos de admisión</option>
+                <option>Tarifas y costos</option>
+                <option>Trámites y certificados</option>
+                <option>Calendario académico</option>
+                <option>Otro</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Tu mensaje *</label>
+              <textarea class="form-control" id="acMensaje" rows="3" placeholder="Describe brevemente tu consulta..." required></textarea>
+            </div>
+            <button type="submit" class="form-submit">
+              Enviar consulta
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </button>
+          </form>
+          <div class="success-msg" id="acercaSuccessMsg">✓ ¡Gracias! Tu consulta ha sido recibida. Nos pondremos en contacto pronto.</div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- ════════════════════ PREGRADO ════════════════════ -->
+<div class="page" id="page-pregrado">
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="breadcrumb"><a onclick="gotoPage('home')">Inicio</a><span>/</span><a onclick="gotoPage('inscripcion')">Inscripción</a><span>/</span><span>Pregrado</span></div>
+      <h2>Programas de Pregrado</h2>
+      <p>Oferta académica de pregrado · Universidad EAFIT 2026</p>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="prog-layout">
+      <!-- Info box left -->
+      <div class="prog-info-box">
+        <p class="pib-tag">Nivel de formación</p>
+        <h3 class="pib-title">Pregrado</h3>
+        <p class="pib-desc">Un programa de pregrado es la formación universitaria de primer ciclo. Desarrolla competencias profesionales, científicas y humanísticas para el desempeño en un campo disciplinar específico. Al graduarte obtendrás el título de profesional universitario.</p>
+        <div class="pib-stat"><span>Duración típica</span><strong>8–10 semestres</strong></div>
+        <div class="pib-stat"><span>Título otorgado</span><strong>Profesional</strong></div>
+        <div class="pib-stat"><span>Modalidades</span><strong>Presencial / Virtual</strong></div>
+        <div class="pib-stat"><span>Sede principal</span><strong>Medellín</strong></div>
+        <div class="pib-cta">
+          <button class="btn-primary" style="justify-content:center; font-size:13px;" onclick="gotoPage('inscripcion')">Iniciar inscripción →</button>
+          <button class="btn-outline" style="justify-content:center; font-size:13px; border-color:rgba(255,255,255,0.2); color:rgba(255,255,255,0.7);" onclick="gotoPage('contacto')">Consultar asesor</button>
+        </div>
+      </div>
+      <!-- Search + grid -->
+      <div class="prog-right">
+        <div class="prog-search-bar">
+          <div class="search-bar">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <input type="text" id="pregSearch" placeholder="Buscar programa de pregrado...">
+          </div>
+          <select class="prog-filter-select" id="pregArea">
+            <option value="">Área de conocimiento</option>
+            <option value="ingenieria">Ingeniería y Tecnología</option>
+            <option value="ciencias">Ciencias Básicas</option>
+            <option value="administracion">Administración</option>
+            <option value="derecho">Derecho y Humanidades</option>
+            <option value="musica">Música y Artes</option>
+          </select>
+          <select class="prog-filter-select" id="pregEscuela">
+            <option value="">Escuela</option>
+            <option value="ingenieria">Escuela de Ingeniería</option>
+            <option value="administracion">Escuela de Administración</option>
+            <option value="ciencias">Escuela de Ciencias</option>
+            <option value="humanidades">Escuela de Humanidades</option>
+            <option value="musica">Escuela de Música</option>
+          </select>
+          <button class="prog-filter-btn" onclick="filterPreg()">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+            Filtrar
+          </button>
+        </div>
+        <div class="prog-grid" id="pregGrid">
+          <!-- 9 programs -->
+          <div class="prog-card" data-area="ingenieria" data-escuela="ingenieria">
+            <p class="prog-card-area">Ingeniería y Tecnología</p>
+            <p class="prog-card-title">Ingeniería de Sistemas</p>
+            <div class="prog-card-meta">
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>10 semestres</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Presencial</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10"/></svg>Español</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/></svg>Medellín</div>
+            </div>
+            <button class="prog-card-btn" onclick="window.open('https://www.eafit.edu.co/pregrados/escuela-ciencias-aplicadas-ingenieria/ingenieria-sistemas','_blank')">Ver programa →</button>
+          </div>
+          <div class="prog-card" data-area="ingenieria" data-escuela="ingenieria">
+            <p class="prog-card-area">Ingeniería y Tecnología</p>
+            <p class="prog-card-title">Ingeniería Civil</p>
+            <div class="prog-card-meta">
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>10 semestres</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Presencial</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10"/></svg>Español</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/></svg>Medellín</div>
+            </div>
+            <button class="prog-card-btn" onclick="window.open('https://www.eafit.edu.co/pregrados/escuela-ciencias-aplicadas-ingenieria/ingenieria-civil','_blank')">Ver programa →</button>
+          </div>
+          <div class="prog-card" data-area="administracion" data-escuela="administracion">
+            <p class="prog-card-area">Administración</p>
+            <p class="prog-card-title">Administración de Negocios</p>
+            <div class="prog-card-meta">
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>9 semestres</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Presencial</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10"/></svg>Español / Inglés</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/></svg>Medellín</div>
+            </div>
+            <button class="prog-card-btn" onclick="window.open('https://www.eafit.edu.co/pregrados/escuela-administracion/administracion-negocios','_blank')">Ver programa →</button>
+          </div>
+          <div class="prog-card" data-area="derecho" data-escuela="humanidades">
+            <p class="prog-card-area">Derecho y Humanidades</p>
+            <p class="prog-card-title">Derecho</p>
+            <div class="prog-card-meta">
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>10 semestres</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Presencial</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10"/></svg>Español</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/></svg>Medellín</div>
+            </div>
+            <button class="prog-card-btn" onclick="window.open('https://www.eafit.edu.co/pregrados/escuela-derecho/derecho','_blank')">Ver programa →</button>
+          </div>
+          <div class="prog-card" data-area="ciencias" data-escuela="ciencias">
+            <p class="prog-card-area">Ciencias Básicas</p>
+            <p class="prog-card-title">Matemáticas y Física</p>
+            <div class="prog-card-meta">
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>9 semestres</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Presencial</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10"/></svg>Español</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/></svg>Medellín</div>
+            </div>
+            <button class="prog-card-btn" onclick="window.open('https://www.eafit.edu.co/pregrados/escuela-ciencias-aplicadas-ingenieria/ingenieria-matematica','_blank')">Ver programa →</button>
+          </div>
+          <div class="prog-card" data-area="ingenieria" data-escuela="ingenieria">
+            <p class="prog-card-area">Ingeniería y Tecnología</p>
+            <p class="prog-card-title">Ingeniería Mecánica</p>
+            <div class="prog-card-meta">
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>10 semestres</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Presencial</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10"/></svg>Español</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/></svg>Medellín</div>
+            </div>
+            <button class="prog-card-btn" onclick="window.open('https://www.eafit.edu.co/pregrados/escuela-ciencias-aplicadas-ingenieria/ingenieria-mecanica','_blank')">Ver programa →</button>
+          </div>
+          <div class="prog-card" data-area="musica" data-escuela="musica">
+            <p class="prog-card-area">Música y Artes</p>
+            <p class="prog-card-title">Música</p>
+            <div class="prog-card-meta">
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>9 semestres</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Presencial</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10"/></svg>Español</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/></svg>Medellín</div>
+            </div>
+            <button class="prog-card-btn" onclick="window.open('https://www.eafit.edu.co/pregrados/escuela-artes-humanidades/musica','_blank')">Ver programa →</button>
+          </div>
+          <div class="prog-card" data-area="administracion" data-escuela="administracion">
+            <p class="prog-card-area">Administración</p>
+            <p class="prog-card-title">Economía</p>
+            <div class="prog-card-meta">
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>9 semestres</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Presencial</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10"/></svg>Español</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/></svg>Medellín</div>
+            </div>
+            <button class="prog-card-btn" onclick="window.open('https://www.eafit.edu.co/pregrados/escuela-finanzas-economia-gobierno/economia','_blank')">Ver programa →</button>
+          </div>
+          <div class="prog-card" data-area="ingenieria" data-escuela="ingenieria">
+            <p class="prog-card-area">Ingeniería y Tecnología</p>
+            <p class="prog-card-title">Ingeniería de Producción</p>
+            <div class="prog-card-meta">
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>10 semestres</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Presencial</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10"/></svg>Español</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/></svg>Medellín</div>
+            </div>
+            <button class="prog-card-btn" onclick="window.open('https://www.eafit.edu.co/pregrados/escuela-ciencias-aplicadas-ingenieria/ingenieria-produccion','_blank')">Ver programa →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACERCA DE + FORMULARIO (replicado en Aspirante de Pregrado) -->
+    <section class="section" style="margin-top:3.5rem;">
+      <div class="section-header">
+        <h2 class="section-title">Acerca de</h2>
+        <span class="section-link">Información del proceso · Pregrado EAFIT</span>
+      </div>
+      <div class="acerca-layout">
+
+        <!-- Bloque institucional -->
+        <div style="display:flex; flex-direction:column; gap:1.5rem;">
+          <div class="card" style="cursor:default;">
+            <p class="card-tag">¿Qué es la Oficina de Admisiones y Registro?</p>
+            <p class="card-title" style="font-size:1.15rem; margin-bottom:0.75rem;">Gestión integral del ciclo académico</p>
+            <p class="card-desc" style="margin-bottom:0; font-size:14px; line-height:1.75;">La Oficina de Admisiones y Registro de la Universidad EAFIT es la dependencia encargada de gestionar todos los procesos relacionados con el ingreso, permanencia y graduación de los estudiantes. Coordina las inscripciones a programas de pregrado y posgrado, administra el registro académico y garantiza la integridad de la información educativa de cada estudiante a lo largo de su trayectoria universitaria.</p>
+          </div>
+          <div class="acerca-info-sub" style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+            <div class="info-box">
+              <p class="info-box-title">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px; color:var(--cyan-dark);"><path d="M9 11H5a2 2 0 0 0-2 2v7h18v-7a2 2 0 0 0-2-2h-4"/><rect x="9" y="3" width="6" height="8" rx="1"/></svg>
+                Nuestros servicios
+              </p>
+              <ul>
+                <li>Inscripción y admisión</li>
+                <li>Registro académico</li>
+                <li>Certificados y constancias</li>
+                <li>Trámites estudiantiles</li>
+                <li>Grados y diplomas</li>
+              </ul>
+            </div>
+            <div class="info-box">
+              <p class="info-box-title">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px; color:var(--cyan-dark);"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Atención presencial
+              </p>
+              <ul>
+                <li>Lun — Vie · 8:00 am – 5:00 pm</li>
+                <li>Bloque 26, Piso 1</li>
+                <li>Campus EAFIT, Medellín</li>
+                <li>admisiones.registro@eafit.edu.co</li>
+                <li>PBX: +57 (604) 261 9500</li>
+              </ul>
+            </div>
+          </div>
+          <div class="acerca-stats" style="display:grid; grid-template-columns:repeat(3,1fr); gap:1rem;">
+            <div style="background:#000000; border:1px solid #1f1f1f; border-radius:var(--radius); padding:1.25rem; text-align:center;">
+              <p style="font-size:1.8rem; font-weight:700; color:white; line-height:1;">24+</p>
+              <p style="font-size:11px; color:rgba(255,255,255,0.55); margin-top:4px; font-weight:600; letter-spacing:0.07em; text-transform:uppercase;">Trámites en línea</p>
+            </div>
+            <div style="background:#000000; border:1px solid #1f1f1f; border-radius:var(--radius); padding:1.25rem; text-align:center;">
+              <p style="font-size:1.8rem; font-weight:700; color:white; line-height:1;">2026-1</p>
+              <p style="font-size:11px; color:rgba(255,255,255,0.55); margin-top:4px; font-weight:600; letter-spacing:0.07em; text-transform:uppercase;">Período activo</p>
+            </div>
+            <div style="background:#000000; border:1px solid #1f1f1f; border-radius:var(--radius); padding:1.25rem; text-align:center;">
+              <p style="font-size:1.8rem; font-weight:700; color:white; line-height:1;">40+</p>
+              <p style="font-size:11px; color:rgba(255,255,255,0.55); margin-top:4px; font-weight:600; letter-spacing:0.07em; text-transform:uppercase;">Programas</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Formulario de contacto -->
+        <div class="card" style="cursor:default; padding:2rem;">
+          <p class="card-tag">Formulario de contacto</p>
+          <p class="card-title" style="font-size:1.1rem; margin-bottom:1.4rem;">Recibe información de pregrado</p>
+          <form id="pregForm">
+            <div class="form-group">
+              <label class="form-label">Nombre completo *</label>
+              <input class="form-control" type="text" id="pgNombre" placeholder="Tu nombre completo" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Correo electrónico *</label>
+              <input class="form-control" type="email" id="pgEmail" placeholder="nombre@ejemplo.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Teléfono</label>
+              <input class="form-control" type="tel" id="pgTel" placeholder="+57 300 000 0000">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Programa de interés *</label>
+              <select class="form-control" id="pgPrograma" required>
+                <option value="">Selecciona un programa...</option>
+                <option>Ingeniería de Sistemas</option>
+                <option>Ingeniería Civil</option>
+                <option>Ingeniería Mecánica</option>
+                <option>Ingeniería de Producción</option>
+                <option>Administración de Negocios</option>
+                <option>Economía</option>
+                <option>Derecho</option>
+                <option>Música</option>
+                <option>Matemáticas y Física</option>
+                <option>Otro</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Tu mensaje *</label>
+              <textarea class="form-control" id="pgMensaje" rows="3" placeholder="Cuéntanos en qué podemos ayudarte..." required></textarea>
+            </div>
+            <button type="submit" class="form-submit">
+              Enviar consulta
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </button>
+          </form>
+          <div class="success-msg" id="pregSuccessMsg">✓ ¡Gracias! Un asesor de Pregrado te contactará pronto.</div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- ════════════════════ POSGRADO ════════════════════ -->
+<div class="page" id="page-posgrado">
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="breadcrumb"><a onclick="gotoPage('home')">Inicio</a><span>/</span><a onclick="gotoPage('inscripcion')">Inscripción</a><span>/</span><span>Posgrado</span></div>
+      <h2>Programas de Posgrado</h2>
+      <p>Especializaciones, maestrías y doctorados · Universidad EAFIT 2026</p>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="prog-layout">
+      <div class="prog-info-box">
+        <p class="pib-tag">Nivel de formación</p>
+        <h3 class="pib-title">Posgrado</h3>
+        <p class="pib-desc">Los programas de posgrado profundizan el conocimiento más allá del pregrado. Incluyen especializaciones (enfocadas en práctica profesional), maestrías (investigación o profundización) y doctorados (investigación de frontera del conocimiento).</p>
+        <div class="pib-stat"><span>Especialización</span><strong>2–4 semestres</strong></div>
+        <div class="pib-stat"><span>Maestría</span><strong>4–6 semestres</strong></div>
+        <div class="pib-stat"><span>Doctorado</span><strong>8–10 semestres</strong></div>
+        <div class="pib-stat"><span>Sedes</span><strong>Medellín / Virtual</strong></div>
+        <div class="pib-cta">
+          <button class="btn-primary" style="justify-content:center; font-size:13px;" onclick="gotoPage('inscripcion')">Iniciar inscripción →</button>
+          <button class="btn-outline" style="justify-content:center; font-size:13px; border-color:rgba(255,255,255,0.2); color:rgba(255,255,255,0.7);" onclick="gotoPage('contacto')">Consultar asesor</button>
+        </div>
+      </div>
+      <div class="prog-right">
+        <div class="prog-search-bar">
+          <div class="search-bar">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <input type="text" id="posSearch" placeholder="Buscar programa de posgrado...">
+          </div>
+          <select class="prog-filter-select" id="posArea">
+            <option value="">Área de conocimiento</option>
+            <option value="ingenieria">Ingeniería y Tecnología</option>
+            <option value="ciencias">Ciencias Básicas</option>
+            <option value="administracion">Administración</option>
+            <option value="derecho">Derecho y Humanidades</option>
+            <option value="musica">Música y Artes</option>
+          </select>
+          <select class="prog-filter-select" id="posEscuela">
+            <option value="">Escuela</option>
+            <option value="ingenieria">Escuela de Ingeniería</option>
+            <option value="administracion">Escuela de Administración</option>
+            <option value="ciencias">Escuela de Ciencias</option>
+            <option value="humanidades">Escuela de Humanidades</option>
+          </select>
+          <button class="prog-filter-btn" onclick="filterPos()">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+            Filtrar
+          </button>
+        </div>
+        <div class="prog-grid" id="posGrid">
+          <div class="prog-card" data-area="ingenieria" data-escuela="ingenieria">
+            <p class="prog-card-area">Ingeniería · Maestría</p>
+            <p class="prog-card-title">Maestría en Ingeniería</p>
+            <div class="prog-card-meta">
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>4 semestres</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Presencial</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10"/></svg>Español</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/></svg>Medellín</div>
+            </div>
+            <button class="prog-card-btn" onclick="window.open('https://www.eafit.edu.co/posgrados/escuela-ciencias-aplicadas-ingenieria/maestria-ingenieria','_blank')">Ver programa →</button>
+          </div>
+          <div class="prog-card" data-area="administracion" data-escuela="administracion">
+            <p class="prog-card-area">Administración · Maestría</p>
+            <p class="prog-card-title">MBA — Maestría en Administración</p>
+            <div class="prog-card-meta">
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>4 semestres</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Presencial / Virtual</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10"/></svg>Español / Inglés</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/></svg>Medellín</div>
+            </div>
+            <button class="prog-card-btn" onclick="window.open('https://www.eafit.edu.co/posgrados/escuela-administracion/maestria-administracion-mba-medellin','_blank')">Ver programa →</button>
+          </div>
+          <div class="prog-card" data-area="derecho" data-escuela="humanidades">
+            <p class="prog-card-area">Derecho · Especialización</p>
+            <p class="prog-card-title">Especialización en Derecho Empresarial</p>
+            <div class="prog-card-meta">
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>2 semestres</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Presencial</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10"/></svg>Español</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/></svg>Medellín</div>
+            </div>
+            <button class="prog-card-btn" onclick="window.open('https://www.eafit.edu.co/posgrados/escuela-derecho/especializacion-derecho-empresarial-comercial','_blank')">Ver programa →</button>
+          </div>
+          <div class="prog-card" data-area="ciencias" data-escuela="ciencias">
+            <p class="prog-card-area">Ciencias · Doctorado</p>
+            <p class="prog-card-title">Doctorado en Ciencias Matemáticas</p>
+            <div class="prog-card-meta">
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>8 semestres</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Presencial</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10"/></svg>Español / Inglés</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/></svg>Medellín</div>
+            </div>
+            <button class="prog-card-btn" onclick="window.open('https://www.eafit.edu.co/posgrados/escuela-ciencias-aplicadas-ingenieria/doctorado-ingenieria-matematica','_blank')">Ver programa →</button>
+          </div>
+          <div class="prog-card" data-area="ingenieria" data-escuela="ingenieria">
+            <p class="prog-card-area">Ingeniería · Especialización</p>
+            <p class="prog-card-title">Especialización en Inteligencia Artificial</p>
+            <div class="prog-card-meta">
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>2 semestres</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Virtual</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10"/></svg>Español</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/></svg>Virtual / Nacional</div>
+            </div>
+            <button class="prog-card-btn" onclick="window.open('https://www.eafit.edu.co/posgrados/escuela-ciencias-aplicadas-ingenieria/maestria-inteligencia-artificial','_blank')">Ver programa →</button>
+          </div>
+          <div class="prog-card" data-area="administracion" data-escuela="administracion">
+            <p class="prog-card-area">Administración · Maestría</p>
+            <p class="prog-card-title">Maestría en Mercadeo</p>
+            <div class="prog-card-meta">
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>4 semestres</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Presencial</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10"/></svg>Español</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/></svg>Medellín</div>
+            </div>
+            <button class="prog-card-btn" onclick="window.open('https://www.eafit.edu.co/posgrados/escuela-administracion/maestria-mercadeo-medellin','_blank')">Ver programa →</button>
+          </div>
+          <div class="prog-card" data-area="ingenieria" data-escuela="ingenieria">
+            <p class="prog-card-area">Ingeniería · Doctorado</p>
+            <p class="prog-card-title">Doctorado en Ingeniería</p>
+            <div class="prog-card-meta">
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>10 semestres</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Presencial</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10"/></svg>Español / Inglés</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/></svg>Medellín</div>
+            </div>
+            <button class="prog-card-btn" onclick="window.open('https://www.eafit.edu.co/posgrados/escuela-ciencias-aplicadas-ingenieria/doctorado-ingenieria','_blank')">Ver programa →</button>
+          </div>
+          <div class="prog-card" data-area="derecho" data-escuela="humanidades">
+            <p class="prog-card-area">Humanidades · Maestría</p>
+            <p class="prog-card-title">Maestría en Hermenéutica Literaria</p>
+            <div class="prog-card-meta">
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>4 semestres</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Presencial</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10"/></svg>Español</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/></svg>Medellín</div>
+            </div>
+            <button class="prog-card-btn" onclick="window.open('https://www.eafit.edu.co/posgrados/escuela-artes-humanidades/maestria-hermeneutica-literaria','_blank')">Ver programa →</button>
+          </div>
+          <div class="prog-card" data-area="administracion" data-escuela="administracion">
+            <p class="prog-card-area">Administración · Especialización</p>
+            <p class="prog-card-title">Especialización en Finanzas</p>
+            <div class="prog-card-meta">
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>2 semestres</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Virtual</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10"/></svg>Español</div>
+              <div class="prog-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/></svg>Virtual / Nacional</div>
+            </div>
+            <button class="prog-card-btn" onclick="window.open('https://www.eafit.edu.co/posgrados/escuela-finanzas-economia-gobierno/especializacion-finanzas','_blank')">Ver programa →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════ INSCRIPCIÓN ════════════════════ -->
+<div class="page" id="page-inscripcion">
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="breadcrumb"><a onclick="gotoPage('home')">Inicio</a><span>/</span><span>Inscripción y matrícula</span></div>
+      <h2>Inscripción y matrícula</h2>
+      <p>Guía completa del proceso de admisión — Período 2026</p>
+    </div>
+  </div>
+  <div class="page-body">
+    <div style="display:flex; gap:2.5rem; flex-wrap:wrap;">
+      <div style="flex:2; min-width:280px;">
+        <h3 style="font-size:1.35rem; font-weight:700; color:var(--navy); margin-bottom:1.35rem;">Proceso — Pregrado</h3>
+        <div class="step-list" style="margin-bottom:2.5rem;">
+          <div class="step-item"><div class="step-num">1</div><div class="step-content"><p class="step-title">Pago del derecho de inscripción</p><p class="step-desc">Realiza el pago en línea o en entidades bancarias autorizadas. El recibo tiene validez de 30 días.</p></div><span class="step-badge">Primero</span></div>
+          <div class="step-item"><div class="step-num">2</div><div class="step-content"><p class="step-title">Diligenciar el formulario en línea</p><p class="step-desc">Completa tu información personal, académica y los programas de tu interés a través del portal estudiantil.</p></div><span class="step-badge">En línea</span></div>
+          <div class="step-item"><div class="step-num">3</div><div class="step-content"><p class="step-title">Carga de documentos</p><p class="step-desc">Diploma o acta de grado, fotocopia del documento de identidad y fotos recientes en PDF.</p></div><span class="step-badge">Digital</span></div>
+          <div class="step-item"><div class="step-num">4</div><div class="step-content"><p class="step-title">Prueba de admisión</p><p class="step-desc">Examen presencial. Las fechas se asignan por disponibilidad tras completar el registro.</p></div><span class="step-badge">Presencial</span></div>
+          <div class="step-item"><div class="step-num">5</div><div class="step-content"><p class="step-title">Resultados y matrícula</p><p class="step-desc">Consulta tu resultado en el portal y formaliza tu matrícula si eres admitido.</p></div><span class="step-badge">Final</span></div>
+        </div>
+        <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+          <button class="btn-navy" onclick="gotoPage('pregrado')">Ver programas de pregrado →</button>
+          <button class="btn-light" onclick="gotoPage('posgrado')">Ver programas de posgrado →</button>
+        </div>
+      </div>
+      <div style="flex:1; min-width:230px; display:flex; flex-direction:column; gap:1rem;">
+        <div class="info-box"><p class="info-box-title">📅 Fechas importantes</p><ul><li>Inscripciones: 1 jul — 30 ago</li><li>Exámenes: Sep — Oct 2026</li><li>Resultados: 15 de noviembre</li><li>Matrícula: Diciembre 2026</li></ul></div>
+        <div class="info-box"><p class="info-box-title">📎 Documentos requeridos</p><ul><li>Diploma de bachillerato o acta de grado</li><li>Fotocopia del documento de identidad</li><li>2 fotografías 3×4 fondo blanco</li><li>Resultados ICFES (si aplica)</li></ul></div>
+        <div style="background:var(--navy); border-radius:var(--radius); padding:1.5rem; color:white;">
+          <p style="font-size:13px; font-weight:600; color:rgba(255,255,255,0.45); margin-bottom:0.35rem;">¿Tienes dudas?</p>
+          <p style="font-size:13.5px; line-height:1.6; color:rgba(255,255,255,0.7); margin-bottom:1.1rem;">Escríbenos y te respondemos a la brevedad.</p>
+          <button class="btn-primary" style="width:100%; justify-content:center; font-size:13px;" onclick="gotoPage('contacto')">Escribir consulta →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════ TRÁMITES ════════════════════ -->
+<div class="page" id="page-tramites">
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="breadcrumb"><a onclick="gotoPage('home')">Inicio</a><span>/</span><span>Trámites y certificados</span></div>
+      <h2>Trámites y certificados</h2>
+      <p>Catálogo completo de solicitudes y documentos disponibles en línea</p>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="tramites-container">
+      <div class="tramites-toolbar" style="justify-content:space-between;">
+        <div style="display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap;">
+          <div class="search-bar" style="width:260px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <input type="text" placeholder="Buscar..." id="searchInputPage" oninput="applyPageFilter()">
+          </div>
+          <div class="tabs">
+            <button class="tab-btn active" id="ptab-todos" onclick="filterPageTab('todos')">Todos</button>
+            <button class="tab-btn" id="ptab-tramite" onclick="filterPageTab('tramite')">Trámites</button>
+            <button class="tab-btn" id="ptab-certificado" onclick="filterPageTab('certificado')">Certificados</button>
+          </div>
+        </div>
+        <p style="font-size:12px; color:var(--muted);" id="countLabel">12 resultados</p>
+      </div>
+      <div class="tramites-grid" id="tramitesPageGrid">
+        <div class="tramite-card" data-type="tramite" data-title="calificaciones semi cursados" onclick="openTramiteModal('calificaciones-semi')"><p class="tramite-type">Trámite</p><h5 class="tramite-title">Calificaciones semi cursados</h5><a class="tramite-link">Solicitar →</a></div>
+        <div class="tramite-card" data-type="tramite" data-title="icetex apoyo financiero" onclick="openTramiteModal('icetex')"><p class="tramite-type">Trámite</p><h5 class="tramite-title">ICETEX — Apoyo financiero</h5><a class="tramite-link">Solicitar →</a></div>
+        <div class="tramite-card" data-type="tramite" data-title="cancelación asignaturas" onclick="openTramiteModal('cancelacion-asignaturas')"><p class="tramite-type">Trámite</p><h5 class="tramite-title">Cancelación de asignaturas</h5><a class="tramite-link">Solicitar →</a></div>
+        <div class="tramite-card" data-type="tramite" data-title="transferencia interna" onclick="openTramiteModal('transferencia-interna')"><p class="tramite-type">Trámite</p><h5 class="tramite-title">Transferencia interna</h5><a class="tramite-link">Solicitar →</a></div>
+        <div class="tramite-card" data-type="tramite" data-title="validación títulos extranjeros" onclick="openTramiteModal('validacion-titulos')"><p class="tramite-type">Trámite</p><h5 class="tramite-title">Validación de títulos extranjeros</h5><a class="tramite-link">Solicitar →</a></div>
+        <div class="tramite-card" data-type="tramite" data-title="reingreso programa académico" onclick="openTramiteModal('reingreso')"><p class="tramite-type">Trámite</p><h5 class="tramite-title">Reingreso al programa académico</h5><a class="tramite-link">Solicitar →</a></div>
+        <div class="tramite-card" data-type="certificado" data-title="matriculado dedicación semanal" onclick="openTramiteModal('cert-matriculado')"><p class="tramite-type">Certificado</p><h5 class="tramite-title">Matriculado dedicación semanal</h5><a class="tramite-link">Descargar →</a></div>
+        <div class="tramite-card" data-type="certificado" data-title="notas calificaciones oficiales" onclick="openTramiteModal('cert-notas')"><p class="tramite-type">Certificado</p><h5 class="tramite-title">Notas y calificaciones oficiales</h5><a class="tramite-link">Descargar →</a></div>
+        <div class="tramite-card" data-type="certificado" data-title="paz salvo académico" onclick="openTramiteModal('cert-paz-salvo')"><p class="tramite-type">Certificado</p><h5 class="tramite-title">Paz y salvo académico</h5><a class="tramite-link">Descargar →</a></div>
+        <div class="tramite-card" data-type="certificado" data-title="carta presentación entidades" onclick="openTramiteModal('cert-carta')"><p class="tramite-type">Certificado</p><h5 class="tramite-title">Carta de presentación a entidades</h5><a class="tramite-link">Descargar →</a></div>
+        <div class="tramite-card" data-type="certificado" data-title="constancia estudiante activo" onclick="openTramiteModal('cert-constancia')"><p class="tramite-type">Certificado</p><h5 class="tramite-title">Constancia de estudiante activo</h5><a class="tramite-link">Descargar →</a></div>
+        <div class="tramite-card" data-type="certificado" data-title="historia académica completa" onclick="openTramiteModal('cert-historia')"><p class="tramite-type">Certificado</p><h5 class="tramite-title">Historia académica completa</h5><a class="tramite-link">Descargar →</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════ CONTACTO ════════════════════ -->
+<div class="page" id="page-contacto">
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="breadcrumb"><a onclick="gotoPage('home')">Inicio</a><span>/</span><span>Más información</span></div>
+      <h2>Más información</h2>
+      <p>¿Tienes dudas sobre admisiones, registro o trámites? Escríbenos.</p>
+    </div>
+  </div>
+  <div class="page-body">
+    <div style="display:flex; gap:2.5rem; flex-wrap:wrap; align-items:flex-start;">
+      <div style="flex:2; min-width:280px;">
+        <h3 style="font-size:1.3rem; font-weight:700; color:var(--navy); margin-bottom:1.3rem;">Envía tu consulta</h3>
+        <form id="contactForm">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+            <div class="form-group"><label class="form-label">Nombre completo</label><input class="form-control" type="text" id="fullName" placeholder="Juan Pérez" required></div>
+            <div class="form-group"><label class="form-label">Documento</label><input class="form-control" type="text" id="document" placeholder="Número de identidad" required></div>
+          </div>
+          <div class="form-group"><label class="form-label">Correo electrónico</label><input class="form-control" type="email" id="email" placeholder="nombre@ejemplo.com" required></div>
+          <div class="form-group"><label class="form-label">Asunto</label>
+            <select class="form-control" id="subject">
+              <option value="">Selecciona un tema...</option>
+              <option>Inscripción y admisiones</option><option>Matrícula y financiero</option>
+              <option>Trámites y certificados</option><option>Calendario académico</option><option>Otro</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="form-label">Tu consulta</label><textarea class="form-control" id="query" rows="4" placeholder="Describe tu duda detalladamente..." required></textarea></div>
+          <button type="submit" class="form-submit">Enviar consulta <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+        </form>
+        <div class="success-msg" id="successMsg">✓ ¡Gracias! Tu consulta ha sido recibida. Nos pondremos en contacto pronto.</div>
+      </div>
+      <div style="flex:1; min-width:220px; display:flex; flex-direction:column; gap:1rem;">
+        <div class="contact-aside">
+          <h3>Contacto directo</h3>
+          <div class="contact-item"><div class="contact-item-icon">📍</div><div class="contact-item-text"><strong>Dirección</strong>Carrera 49 7 Sur — 50, Medellín</div></div>
+          <div class="contact-item"><div class="contact-item-icon">📞</div><div class="contact-item-text"><strong>PBX</strong>+57 (604) 261 9500</div></div>
+          <div class="contact-item"><div class="contact-item-icon">📞</div><div class="contact-item-text"><strong>Línea nacional</strong>01 8000 515 900</div></div>
+          <div class="contact-item"><div class="contact-item-icon">🕐</div><div class="contact-item-text"><strong>Horario</strong>Lun — Vie · 8:00 am — 5:00 pm</div></div>
+        </div>
+        <div class="info-box"><p class="info-box-title">💡 Antes de escribir</p><ul><li>Revisa las fechas del calendario académico</li><li>Consulta el catálogo de trámites en línea</li><li>Visita la sección de preguntas frecuentes</li></ul></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-logo">
+        <img src="https://www.eafit.edu.co/sites/default/files/logo_EAFIT_negro.svg" alt="EAFIT">
+        <div class="footer-address">Carrera 49 7 Sur — 50<br>Medellín, Colombia<br>PBX: +57 (604) 261 9500<br>Línea Nacional: 01 8000 515 900</div>
+      </div>
+      <div>
+        <p class="footer-heading">Admisiones</p>
+        <ul class="footer-links">
+          <li><a onclick="gotoPage('pregrado')">Programas pregrado</a></li>
+          <li><a onclick="gotoPage('posgrado')">Programas posgrado</a></li>
+          <li><a onclick="gotoPage('inscripcion')">Proceso de inscripción</a></li>
+          <li><a onclick="gotoPage('tramites')">Trámites y certificados</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-heading">Universidad</p>
+        <ul class="footer-links">
+          <li><a href="#">Directorio institucional</a></li>
+          <li><a href="#">Portal de transparencia</a></li>
+          <li><a href="#">Facturación electrónica</a></li>
+          <li><a href="#">Trabaje con nosotros</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-heading">Síguenos</p>
+        <div class="social-row">
+          <a class="social-btn" href="#">fb</a><a class="social-btn" href="#">ig</a>
+          <a class="social-btn" href="#">in</a><a class="social-btn" href="#">yt</a>
+        </div>
+        <p style="font-size:11px; color:var(--muted); line-height:1.65;">Vigilada Mineducación. Institución sujeta a inspección y vigilancia por el Ministerio de Educación Nacional.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal"><a href="#">Aviso de privacidad</a><a href="#">Política de cookies</a><a href="#">Términos de uso</a></div>
+      <p class="footer-copy">© 2026 Universidad EAFIT — Medellín, Colombia</p>
+    </div>
+  </div>
+</footer>
+
+<!-- TRAMITE MODAL -->
+<div class="tramite-overlay" id="tramiteOverlay" onclick="closeTramiteModal()"></div>
+<div class="tramite-modal" id="tramiteModal">
+  <div class="tramite-modal-header">
+    <div>
+      <p class="tramite-modal-type" id="modalType"></p>
+      <p class="tramite-modal-title" id="modalTitle"></p>
+    </div>
+    <button class="tramite-modal-close" onclick="closeTramiteModal()">✕</button>
+  </div>
+  <div class="tramite-modal-body">
+    <p class="tramite-modal-desc" id="modalDesc"></p>
+    <p class="tramite-steps-title">Pasos para solicitarlo</p>
+    <div class="tramite-steps" id="modalSteps"></div>
+    <div class="tramite-modal-footer">
+      <a id="modalLink" href="#" target="_blank" class="btn-navy" style="text-decoration:none; font-size:13px;">Ir al portal EAFIT →</a>
+      <button onclick="closeTramiteModal()" class="btn-light" style="font-size:13px;">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- FABs -->
+<div class="fab-stack">
+  <button class="fab-btn fab-wa" onclick="window.open('https://wa.me/576042619500','_blank')">
+    <span class="fab-tooltip">WhatsApp</span>
+    <svg viewBox="0 0 24 24" fill="white" width="22" height="22"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </button>
+  <button class="fab-btn fab-acc" onclick="toggleA11y()">
+    <span class="fab-tooltip">Accesibilidad</span>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.5" fill="white" stroke="none"/><path d="M4 8h16M9 8v8M15 8v8M9 13h6"/></svg>
+  </button>
+  <button class="fab-btn fab-tr" onclick="toggleTranslate()">
+    <span class="fab-tooltip">Traducir</span>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h8M7 3v2M12 19l3-7 3 7M14.5 14.5h5"/><path d="M5 5c0 4 2.5 6.5 6 8"/><path d="M11 5c0 2-1 4-3 5.5"/></svg>
+  </button>
+</div>
+
+<script>
+// ── NAV ──
+const navMap = { home:'navHome', inscripcion:'navIns', tramites:'navTra', contacto:'navCon' };
+function gotoPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  const el = document.getElementById(navMap[id]);
+  if (el) el.classList.add('active');
+}
+
+// ── MENU ──
+function openMenu() { document.getElementById('sideMenu').classList.add('open'); document.getElementById('overlay').classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeMenu() { document.getElementById('sideMenu').classList.remove('open'); document.getElementById('overlay').classList.remove('open'); document.body.style.overflow = ''; }
+
+// ── HELP DRAWER ──
+let helpOpen = false;
+function toggleHelp() {
+  helpOpen = !helpOpen;
+  document.getElementById('helpDrawer').classList.toggle('open', helpOpen);
+  const tab = document.getElementById('helpTab');
+  tab.style.right = helpOpen ? '320px' : '0';
+}
+
+// ── HERO SEARCH ──
+function heroSearchGo() {
+  const q = document.getElementById('heroSearch').value.trim();
+  if (!q) return;
+  gotoPage('tramites');
+  setTimeout(() => {
+    const inp = document.getElementById('searchInputPage');
+    if (inp) { inp.value = q; applyPageFilter(); }
+  }, 80);
+}
+
+// ── CALENDAR ──
+let calOpen = false;
+function toggleCal() {
+  calOpen = !calOpen;
+  document.getElementById('calBody').classList.toggle('open', calOpen);
+  document.getElementById('calIcon').classList.toggle('open', calOpen);
+}
+
+let calTab = 'todos';
+function filterCal(tab, btn) {
+  calTab = tab;
+  document.querySelectorAll('.cal-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#calGrid .cal-event').forEach(ev => {
+    ev.style.display = (tab === 'todos' || ev.dataset.cal === tab) ? '' : 'none';
+  });
+}
+
+// ── HOME FILTER ──
+let currentTab = 'tramites';
+function filterTab(tab) {
+  currentTab = tab;
+  document.getElementById('tab-tramites').classList.toggle('active', tab === 'tramites');
+  document.getElementById('tab-certificados').classList.toggle('active', tab === 'certificados');
+  applyHomeFilter();
+}
+function applyHomeFilter() {
+  const q = (document.getElementById('searchInput').value || '').toLowerCase();
+  document.querySelectorAll('#tramitesGrid .tramite-card').forEach(card => {
+    const match = card.dataset.type === currentTab && card.querySelector('.tramite-title').textContent.toLowerCase().includes(q);
+    card.style.display = match ? '' : 'none';
+  });
+}
+
+// ── PAGE TRAMITES FILTER ──
+let pageTab = 'todos';
+function filterPageTab(tab) {
+  pageTab = tab;
+  ['todos','tramite','certificado'].forEach(t => document.getElementById('ptab-' + t).classList.toggle('active', t === tab));
+  applyPageFilter();
+}
+function applyPageFilter() {
+  const q = (document.getElementById('searchInputPage').value || '').toLowerCase();
+  let count = 0;
+  document.querySelectorAll('#tramitesPageGrid .tramite-card').forEach(card => {
+    const show = (pageTab === 'todos' || card.dataset.type === pageTab) && (card.dataset.title || '').includes(q);
+    card.style.display = show ? '' : 'none';
+    if (show) count++;
+  });
+  const lbl = document.getElementById('countLabel');
+  if (lbl) lbl.textContent = count + ' resultado' + (count !== 1 ? 's' : '');
+}
+
+// ── PROGRAM FILTERS ──
+function filterPreg() {
+  const q = document.getElementById('pregSearch').value.toLowerCase();
+  const area = document.getElementById('pregArea').value;
+  const esc = document.getElementById('pregEscuela').value;
+  let vis = 0;
+  document.querySelectorAll('#pregGrid .prog-card').forEach(card => {
+    const title = card.querySelector('.prog-card-title').textContent.toLowerCase();
+    const matchQ = !q || title.includes(q);
+    const matchA = !area || card.dataset.area === area;
+    const matchE = !esc || card.dataset.escuela === esc;
+    const show = matchQ && matchA && matchE;
+    card.style.display = show ? '' : 'none';
+    if (show) vis++;
+  });
+  // show no-results if needed
+  let nr = document.getElementById('pregNoResults');
+  if (!nr) { nr = document.createElement('p'); nr.id = 'pregNoResults'; nr.className = 'no-results'; nr.textContent = 'No se encontraron programas con los filtros seleccionados.'; document.getElementById('pregGrid').appendChild(nr); }
+  nr.style.display = vis === 0 ? '' : 'none';
+}
+document.getElementById('pregSearch').addEventListener('keydown', e => { if(e.key==='Enter') filterPreg(); });
+
+function filterPos() {
+  const q = document.getElementById('posSearch').value.toLowerCase();
+  const area = document.getElementById('posArea').value;
+  const esc = document.getElementById('posEscuela').value;
+  let vis = 0;
+  document.querySelectorAll('#posGrid .prog-card').forEach(card => {
+    const title = card.querySelector('.prog-card-title').textContent.toLowerCase();
+    const matchQ = !q || title.includes(q);
+    const matchA = !area || card.dataset.area === area;
+    const matchE = !esc || card.dataset.escuela === esc;
+    const show = matchQ && matchA && matchE;
+    card.style.display = show ? '' : 'none';
+    if (show) vis++;
+  });
+  let nr = document.getElementById('posNoResults');
+  if (!nr) { nr = document.createElement('p'); nr.id = 'posNoResults'; nr.className = 'no-results'; nr.textContent = 'No se encontraron programas con los filtros seleccionados.'; document.getElementById('posGrid').appendChild(nr); }
+  nr.style.display = vis === 0 ? '' : 'none';
+}
+document.getElementById('posSearch').addEventListener('keydown', e => { if(e.key==='Enter') filterPos(); });
+
+// ── ACERCA FORM ──
+document.getElementById('acercaForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const n = document.getElementById('acNombre').value;
+  const em = document.getElementById('acEmail').value;
+  const tel = document.getElementById('acTel').value;
+  const tema = document.getElementById('acTema').value;
+  const msg = document.getElementById('acMensaje').value;
+  const successEl = document.getElementById('acercaSuccessMsg');
+  successEl.style.display = 'block';
+  this.reset();
+  setTimeout(() => {
+    window.location.href = 'mailto:admisiones@eafit.edu.co?subject=' + encodeURIComponent('Consulta — ' + tema + ' — ' + n) + '&body=' + encodeURIComponent('Nombre: '+n+'\nEmail: '+em+'\nTeléfono: '+tel+'\nTema: '+tema+'\n\nMensaje:\n'+msg);
+    setTimeout(() => { successEl.style.display = 'none'; }, 5000);
+  }, 1200);
+});
+
+// ── CONTACT FORM ──
+// ── PREGRADO FORM ──
+const pregFormEl = document.getElementById('pregForm');
+if (pregFormEl) {
+  pregFormEl.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const n = document.getElementById('pgNombre').value;
+    const em = document.getElementById('pgEmail').value;
+    const tel = document.getElementById('pgTel').value;
+    const prog = document.getElementById('pgPrograma').value;
+    const msg = document.getElementById('pgMensaje').value;
+    const successEl = document.getElementById('pregSuccessMsg');
+    successEl.style.display = 'block';
+    this.reset();
+    setTimeout(() => {
+      window.location.href = 'mailto:admisiones@eafit.edu.co?subject=' + encodeURIComponent('Pregrado — ' + prog + ' — ' + n) + '&body=' + encodeURIComponent('Nombre: '+n+'\nEmail: '+em+'\nTeléfono: '+tel+'\nPrograma: '+prog+'\n\nMensaje:\n'+msg);
+      setTimeout(() => { successEl.style.display = 'none'; }, 5000);
+    }, 1200);
+  });
+}
+
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const n = document.getElementById('fullName').value;
+  const d = document.getElementById('document').value;
+  const em = document.getElementById('email').value;
+  const q = document.getElementById('query').value;
+  document.getElementById('successMsg').style.display = 'block';
+  this.reset();
+  setTimeout(() => {
+    window.location.href = 'mailto:admisiones@eafit.edu.co?subject=' + encodeURIComponent('Consulta — ' + n) + '&body=' + encodeURIComponent('Nombre: '+n+'\nDocumento: '+d+'\nEmail: '+em+'\n\nConsulta:\n'+q);
+    setTimeout(() => { document.getElementById('successMsg').style.display = 'none'; }, 5000);
+  }, 1200);
+});
+
+// ── USER TYPE SELECTOR ──
+function selectUserType(type, btn) {
+  document.querySelectorAll('.utc').forEach(c => c.classList.remove('selected'));
+  btn.classList.add('selected');
+  const sub = document.getElementById('subtypeSelector');
+  if (type === 'estudiante-activo') {
+    sub.classList.add('visible');
+  } else {
+    sub.classList.remove('visible');
+    if (type === 'aspirante-pregrado') gotoPage('pregrado');
+    if (type === 'aspirante-posgrado') gotoPage('posgrado');
+  }
+}
+
+// ── TRAMITE DATA ──
+const tramiteData = {
+  'calificaciones-semi': {
+    type: 'Trámite', title: 'Calificaciones semi cursados',
+    desc: 'Este trámite permite registrar las calificaciones de asignaturas que han sido cursadas parcialmente (semi cursadas) debido a circunstancias académicas especiales, como retiro tardío o situaciones de fuerza mayor reconocidas por la institución.',
+    steps: [
+      { t: 'Ingresa al portal estudiantil', d: 'Accede con tu usuario y contraseña institucional en epik.eafit.edu.co' },
+      { t: 'Dirígete a Servicios Académicos', d: 'En el menú principal, selecciona "Trámites" y luego "Calificaciones".' },
+      { t: 'Selecciona la asignatura', d: 'Elige la asignatura correspondiente y verifica que el estado sea "Semi cursada".' },
+      { t: 'Adjunta soporte', d: 'Carga el documento que justifica la situación (incapacidad médica, acta, etc.).' },
+      { t: 'Envía la solicitud', d: 'Confirma el envío. Recibirás respuesta en un máximo de 5 días hábiles al correo institucional.' }
+    ],
+    link: 'https://epik.eafit.edu.co'
+  },
+  'icetex': {
+    type: 'Trámite', title: 'ICETEX — Apoyo financiero',
+    desc: 'Solicitud de certificación y gestión de los créditos educativos ICETEX para estudiantes activos de EAFIT. La Oficina de Admisiones y Registro actúa como intermediaria ante el ICETEX para validar la información académica del estudiante.',
+    steps: [
+      { t: 'Solicita el crédito en ICETEX', d: 'Ingresa a icetex.gov.co y crea o actualiza tu solicitud de crédito educativo para EAFIT.' },
+      { t: 'Genera el certificado de matrícula', d: 'Descarga tu certificado de estudiante activo desde el portal EAFIT (Epik → Certificados).' },
+      { t: 'Dirígete a Admisiones y Registro', d: 'Presenta los documentos en la oficina física o envíalos a admisiones.registro@eafit.edu.co.' },
+      { t: 'Verificación institucional', d: 'EAFIT valida tu estado académico ante ICETEX en un plazo de 3 días hábiles.' },
+      { t: 'Confirmación del desembolso', d: 'ICETEX notifica la aprobación y realiza el desembolso según el calendario pactado.' }
+    ],
+    link: 'https://www.eafit.edu.co/admisiones'
+  },
+  'cancelacion-asignaturas': {
+    type: 'Trámite', title: 'Cancelación de asignaturas',
+    desc: 'Permite retirar oficialmente una o varias asignaturas del período académico en curso sin afectar el promedio acumulado, siempre que se realice dentro de las fechas establecidas en el calendario académico.',
+    steps: [
+      { t: 'Verifica las fechas límite', d: 'Consulta el calendario académico en eafit.edu.co para conocer el período de cancelaciones habilitado.' },
+      { t: 'Ingresa al portal Epik', d: 'Accede a epik.eafit.edu.co con tus credenciales institucionales.' },
+      { t: 'Selecciona "Cancelación de materias"', d: 'En el módulo de Registro Académico, elige las asignaturas que deseas cancelar.' },
+      { t: 'Confirma la cancelación', d: 'Revisa el impacto en créditos y promedio antes de confirmar. La acción es reversible solo dentro del mismo día.' },
+      { t: 'Guarda el comprobante', d: 'Descarga el recibo de cancelación como respaldo. Recibirás confirmación por correo institucional.' }
+    ],
+    link: 'https://epik.eafit.edu.co'
+  },
+  'transferencia-interna': {
+    type: 'Trámite', title: 'Transferencia interna',
+    desc: 'Proceso formal para cambiar de programa académico dentro de la misma universidad, manteniendo el historial académico. Aplica para estudiantes activos que desean continuar en otro pregrado o posgrado de EAFIT.',
+    steps: [
+      { t: 'Consulta los requisitos del programa destino', d: 'Verifica en el sitio web del programa las condiciones de admisión y homologación de materias.' },
+      { t: 'Solicita el formulario', d: 'Descarga el formulario de transferencia interna en eafit.edu.co o retíralo en Admisiones y Registro.' },
+      { t: 'Adjunta documentos', d: 'Historia académica completa, paz y salvo financiero y carta de motivación (en algunos programas).' },
+      { t: 'Entrega en Admisiones y Registro', d: 'Presenta la solicitud en la ventanilla o envíala a admisiones.registro@eafit.edu.co dentro del período habilitado.' },
+      { t: 'Espera respuesta', d: 'El Comité de Admisiones evaluará la solicitud en un plazo de 10 días hábiles y notificará por correo.' }
+    ],
+    link: 'https://www.eafit.edu.co/admisiones'
+  },
+  'validacion-titulos': {
+    type: 'Trámite', title: 'Validación de títulos extranjeros',
+    desc: 'Proceso mediante el cual EAFIT, en coordinación con el Ministerio de Educación Nacional, valida y reconoce títulos de educación superior obtenidos en instituciones del extranjero para efectos de admisión a programas de posgrado.',
+    steps: [
+      { t: 'Reúne los documentos originales', d: 'Título o diploma apostillado, transcripción de notas apostillada y traducción oficial al español si aplica.' },
+      { t: 'Solicita la convalidación ante el MEN', d: 'Ingresa a convalidaciones.mineducacion.gov.co y radica tu solicitud de convalidación de título extranjero.' },
+      { t: 'Notifica a EAFIT', d: 'Envía copia del radicado MEN junto a tu solicitud de admisión a admisiones.registro@eafit.edu.co.' },
+      { t: 'Evaluación académica', d: 'El programa de destino realiza el estudio de equivalencias en un plazo de 15 días hábiles.' },
+      { t: 'Resolución y matrícula', d: 'Una vez aprobada la convalidación, recibirás indicaciones para completar el proceso de matrícula.' }
+    ],
+    link: 'https://www.eafit.edu.co/admisiones'
+  },
+  'reingreso': {
+    type: 'Trámite', title: 'Reingreso al programa académico',
+    desc: 'Permite a un estudiante que interrumpió sus estudios en EAFIT retomar el programa académico en el que estuvo matriculado, sujeto a disponibilidad de cupos y condiciones académicas vigentes.',
+    steps: [
+      { t: 'Verifica el período de solicitudes', d: 'El reingreso debe solicitarse en las fechas establecidas en el calendario académico antes del inicio del semestre.' },
+      { t: 'Solicita paz y salvo financiero', d: 'Confirma en la División Financiera que no tienes deudas pendientes con la universidad.' },
+      { t: 'Diligencia el formulario de reingreso', d: 'Descárgalo en eafit.edu.co o retíralo en la oficina de Admisiones y Registro.' },
+      { t: 'Entrega la documentación', d: 'Formulario firmado, copia de documento de identidad y paz y salvo. Envía a admisiones.registro@eafit.edu.co.' },
+      { t: 'Aprobación y matrícula', d: 'El programa evalúa el caso en 8 días hábiles. Si hay cupo disponible, recibirás instrucciones para matrícula.' }
+    ],
+    link: 'https://www.eafit.edu.co/admisiones'
+  },
+  'cert-matriculado': {
+    type: 'Certificado', title: 'Matriculado — dedicación semanal',
+    desc: 'Documento oficial que certifica que el estudiante se encuentra matriculado en el período académico vigente, especificando la dedicación semanal (tiempo completo o medio tiempo). Requerido por entidades bancarias, empleadores y entidades de gobierno.',
+    steps: [
+      { t: 'Ingresa al portal Epik', d: 'Accede a epik.eafit.edu.co con tu usuario y contraseña institucionales.' },
+      { t: 'Ve a "Servicios y Certificados"', d: 'En el menú, selecciona el módulo de Certificados Académicos.' },
+      { t: 'Selecciona el tipo de certificado', d: 'Elige "Certificado de matrícula — dedicación semanal" del listado disponible.' },
+      { t: 'Elige idioma y destino', d: 'Selecciona español o inglés y si será para uso interno o externo.' },
+      { t: 'Descarga o solicita envío físico', d: 'El documento digital estará disponible de inmediato con firma electrónica. Para versión física, acércate a la oficina.' }
+    ],
+    link: 'https://epik.eafit.edu.co'
+  },
+  'cert-notas': {
+    type: 'Certificado', title: 'Notas y calificaciones oficiales',
+    desc: 'Certificado oficial que relaciona todas las calificaciones obtenidas en las asignaturas cursadas durante el período o la historia académica completa. Tiene validez institucional con firma y sello de Admisiones y Registro.',
+    steps: [
+      { t: 'Ingresa al portal Epik', d: 'Accede con tu usuario institucional en epik.eafit.edu.co.' },
+      { t: 'Selecciona "Certificados académicos"', d: 'Navega al módulo de certificados dentro de Servicios Estudiantiles.' },
+      { t: 'Elige "Notas y calificaciones"', d: 'Escoge si deseas el certificado por período específico o histórico completo.' },
+      { t: 'Confirma los datos', d: 'Verifica que la información del período seleccionado sea correcta antes de generar el documento.' },
+      { t: 'Descarga el PDF firmado', d: 'El sistema genera el certificado con código de verificación QR. Disponible en minutos.' }
+    ],
+    link: 'https://epik.eafit.edu.co'
+  },
+  'cert-paz-salvo': {
+    type: 'Certificado', title: 'Paz y salvo académico',
+    desc: 'Documento que certifica que el estudiante no tiene obligaciones académicas ni administrativas pendientes con la universidad. Es requerido para grado, transferencias, expedición de diplomas y trámites institucionales.',
+    steps: [
+      { t: 'Verifica tus obligaciones', d: 'Antes de solicitarlo, asegúrate de no tener deudas financieras, libros de biblioteca o equipos prestados.' },
+      { t: 'Ingresa al portal Epik', d: 'Accede a epik.eafit.edu.co con tus credenciales.' },
+      { t: 'Solicita el paz y salvo', d: 'En el módulo de Certificados, selecciona "Paz y Salvo Académico".' },
+      { t: 'Espera la validación', d: 'El sistema verifica automáticamente con Biblioteca, Financiero y Registro. Tiempo estimado: 1 día hábil.' },
+      { t: 'Descarga el documento', d: 'Una vez validado, podrás descargar el certificado firmado digitalmente desde el portal.' }
+    ],
+    link: 'https://epik.eafit.edu.co'
+  },
+  'cert-carta': {
+    type: 'Certificado', title: 'Carta de presentación a entidades',
+    desc: 'Carta oficial emitida por la Universidad EAFIT que presenta al estudiante ante entidades externas (empresas, consulados, organizaciones internacionales), indicando su condición de estudiante activo y los datos del programa.',
+    steps: [
+      { t: 'Ingresa al portal Epik', d: 'Accede con tus credenciales institucionales en epik.eafit.edu.co.' },
+      { t: 'Ve a Servicios y Certificados', d: 'Selecciona "Carta de presentación a entidades" en el catálogo de documentos.' },
+      { t: 'Especifica el destinatario', d: 'Escribe el nombre de la entidad o empresa a la que va dirigida la carta.' },
+      { t: 'Indica el propósito', d: 'Agrega el motivo de la solicitud (práctica, visa, convenio, beca, etc.).' },
+      { t: 'Solicita y recoge', d: 'El documento se genera en 2 días hábiles. Puedes descargarlo en PDF o recogerlo físico en Admisiones.' }
+    ],
+    link: 'https://epik.eafit.edu.co'
+  },
+  'cert-constancia': {
+    type: 'Certificado', title: 'Constancia de estudiante activo',
+    desc: 'Certifica que la persona se encuentra matriculada y activa en el período académico en curso en la Universidad EAFIT. Es el documento más solicitado para trámites con entidades externas, EPS, ARL y empleadores.',
+    steps: [
+      { t: 'Accede al portal Epik', d: 'Ingresa a epik.eafit.edu.co con tu usuario y clave institucionales.' },
+      { t: 'Navega a Certificados', d: 'En el panel de inicio, selecciona "Servicios" → "Certificados académicos".' },
+      { t: 'Elige "Constancia de estudiante activo"', d: 'Selecciona el período académico actual y el idioma del documento.' },
+      { t: 'Genera el documento', d: 'El sistema crea el PDF de inmediato con firma digital y sello institucional.' },
+      { t: 'Descarga o comparte', d: 'Puedes compartir el enlace de verificación directamente con la entidad solicitante.' }
+    ],
+    link: 'https://epik.eafit.edu.co'
+  },
+  'cert-historia': {
+    type: 'Certificado', title: 'Historia académica completa',
+    desc: 'Documento oficial que presenta el historial completo de asignaturas cursadas, calificaciones, créditos aprobados y promedio acumulado desde el inicio del programa hasta el período más reciente.',
+    steps: [
+      { t: 'Ingresa al portal Epik', d: 'Accede con tus credenciales en epik.eafit.edu.co.' },
+      { t: 'Selecciona "Certificados académicos"', d: 'Desde el panel de inicio, navega al módulo de certificados.' },
+      { t: 'Elige "Historia académica"', d: 'Selecciona si deseas el resumen por períodos o el detalle completo de todas las asignaturas.' },
+      { t: 'Elige el formato', d: 'Disponible en español o inglés, y con o sin escala de equivalencias internacionales.' },
+      { t: 'Descarga el PDF', d: 'El documento se genera en segundos con código de verificación QR para validación por terceros.' }
+    ],
+    link: 'https://epik.eafit.edu.co'
+  }
+};
+
+function openTramiteModal(id) {
+  const d = tramiteData[id];
+  if (!d) return;
+  document.getElementById('modalType').textContent = d.type;
+  document.getElementById('modalTitle').textContent = d.title;
+  document.getElementById('modalDesc').textContent = d.desc;
+  document.getElementById('modalLink').href = d.link;
+  const stepsEl = document.getElementById('modalSteps');
+  stepsEl.innerHTML = d.steps.map((s, i) =>
+    `<div class="tramite-step"><div class="tramite-step-num">${i+1}</div><div class="tramite-step-text"><strong>${s.t}</strong><span>${s.d}</span></div></div>`
+  ).join('');
+  document.getElementById('tramiteOverlay').classList.add('open');
+  document.getElementById('tramiteModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeTramiteModal() {
+  document.getElementById('tramiteOverlay').classList.remove('open');
+  document.getElementById('tramiteModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ── FABs ──
+let a11y = 0;
+function toggleA11y() { a11y = (a11y+1)%3; document.documentElement.style.fontSize = ['16px','18px','20px'][a11y]; }
+function toggleTranslate() { alert('Para producción: conecta la API de Google Translate o el servicio institucional de EAFIT.'); }
+
+// Init
+applyHomeFilter();
+applyPageFilter();
+</script>
+</body>
+</html>
