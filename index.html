@@ -3,7 +3,78 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admisiones — Universidad EAFIT</title>
+<title>Admisiones EAFIT Medellín 2026 | Inscripciones Pregrado y Posgrado</title>
+
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wqsx67obhm");
+</script>
+
+<!-- SEO básico -->
+<meta name="description" content="Realiza tu inscripción a pregrado o posgrado en la Universidad EAFIT, Medellín. Consulta programas, calendario académico 2026, trámites y certificados académicos en línea.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Universidad EAFIT — Admisiones y Registro">
+<meta name="geo.region" content="CO-ANT">
+<meta name="geo.placename" content="Medellín, Antioquia, Colombia">
+<link rel="canonical" href="https://www.eafit.edu.co/admisiones">
+
+<!-- Open Graph (redes sociales) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Universidad EAFIT">
+<meta property="og:title" content="Admisiones EAFIT Medellín 2026 | Inscripciones Pregrado y Posgrado">
+<meta property="og:description" content="Realiza tu inscripción a pregrado o posgrado en la Universidad EAFIT, Medellín. Consulta programas, calendario académico 2026, trámites y certificados académicos en línea.">
+<meta property="og:url" content="https://www.eafit.edu.co/admisiones">
+<meta property="og:locale" content="es_CO">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Admisiones EAFIT Medellín 2026 | Inscripciones Pregrado y Posgrado">
+<meta name="twitter:description" content="Realiza tu inscripción a pregrado o posgrado en la Universidad EAFIT, Medellín. Consulta programas, calendario académico 2026, trámites y certificados en línea.">
+<meta name="twitter:site" content="@eafit">
+
+<!-- Datos estructurados JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollegeOrUniversity",
+      "@id": "https://www.eafit.edu.co/#organization",
+      "name": "Universidad EAFIT",
+      "url": "https://www.eafit.edu.co",
+      "logo": "https://www.eafit.edu.co/sites/default/files/logo_EAFIT_negro.svg",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Carrera 49 No 7 Sur 50",
+        "addressLocality": "Medellín",
+        "addressRegion": "Antioquia",
+        "postalCode": "050022",
+        "addressCountry": "CO"
+      },
+      "telephone": "+57-604-2619500",
+      "email": "admisiones.registro@eafit.edu.co",
+      "sameAs": [
+        "https://www.facebook.com/eafit",
+        "https://twitter.com/eafit",
+        "https://www.instagram.com/eafit"
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.eafit.edu.co/admisiones",
+      "url": "https://www.eafit.edu.co/admisiones",
+      "name": "Admisiones EAFIT Medellín 2026 | Inscripciones Pregrado y Posgrado",
+      "description": "Realiza tu inscripción a pregrado o posgrado en la Universidad EAFIT, Medellín. Consulta programas, calendario académico 2026, trámites y certificados en línea.",
+      "inLanguage": "es-CO",
+      "isPartOf": { "@id": "https://www.eafit.edu.co/#organization" }
+    }
+  ]
+}
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -242,7 +313,7 @@ body { font-family: var(--font-body); color: var(--text); background: var(--whit
   transition: background 0.2s;
 }
 .calendario-header:hover { background: var(--off-white); }
-.calendario-header-left h3 { font-size: 1.2rem; font-weight: 700; color: var(--navy); }
+.calendario-header-left h3, .calendario-header-left h2 { font-size: 1.2rem; font-weight: 700; color: var(--navy); }
 .calendario-header-left p { font-size: 13px; color: var(--slate); margin-top: 2px; }
 .cal-toggle-btn {
   display: flex; align-items: center; gap: 7px;
@@ -560,7 +631,7 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 <div class="overlay" id="overlay" onclick="closeMenu()"></div>
 
 <!-- NAV SIDE MENU -->
-<aside class="side-menu" id="sideMenu">
+<aside class="side-menu" id="sideMenu" role="navigation" aria-label="Menú de navegación principal">
   <div class="side-menu-header">
     <span>Menú</span>
     <button class="close-btn" onclick="closeMenu()">✕</button>
@@ -594,7 +665,7 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 </button>
 
 <!-- HELP DRAWER -->
-<aside class="help-drawer" id="helpDrawer">
+<aside class="help-drawer" id="helpDrawer" role="complementary" aria-label="Centro de ayuda">
   <div class="help-drawer-header">
     <h3>Centro de ayuda</h3>
     <button class="help-close" onclick="toggleHelp()">✕</button>
@@ -655,7 +726,7 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 </aside>
 
 <!-- HEADER -->
-<header class="header">
+<header class="header" role="banner">
   <div class="header-inner">
     <div class="logo-group" onclick="gotoPage('home')">
       <img src="https://www.eafit.edu.co/sites/default/files/logo_EAFIT_negro.svg" alt="EAFIT">
@@ -672,10 +743,11 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 </header>
 
 <!-- ════════════════════ HOME ════════════════════ -->
+<main id="main-content" role="main">
 <div class="page active" id="page-home">
   <section class="hero">
     <div class="hero-inner">
-      <h1>Admisiones</h1>
+      <h1 aria-label="Admisiones Universidad EAFIT Medellín — Inscripciones Pregrado y Posgrado 2026">Admisiones</h1>
       <p class="hero-subtitle">Tu proceso de ingreso y gestión académica centralizado. Toda la información para ser parte de la comunidad EAFITense.</p>
       <div class="hero-search">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -737,7 +809,7 @@ textarea.form-control { resize: vertical; min-height: 110px; }
       <div class="inscripciones-top">
         <div>
           <p class="inscripciones-label">Convocatoria abierta · 2026</p>
-          <h3 class="inscripciones-title">Inscripciones</h3>
+          <h2 class="inscripciones-title">Inscripciones</h2>
           <p class="inscripciones-subtitle">Selecciona tu nivel de formación para comenzar</p>
         </div>
         <div style="font-size:12px; color:rgba(255,255,255,0.32); text-align:right; line-height:1.65;">
@@ -778,7 +850,7 @@ textarea.form-control { resize: vertical; min-height: 110px; }
     <div class="calendario-full" style="border-radius: 0 0 var(--radius) var(--radius); border-top: none; margin-bottom: 3.75rem;">
       <div class="calendario-header" onclick="toggleCal()">
         <div class="calendario-header-left">
-          <h3>Calendario Académico 2026</h3>
+          <h2 class="calendario-title">Calendario Académico 2026</h2>
           <p>Fechas clave, períodos y eventos del ciclo académico</p>
         </div>
         <button class="cal-toggle-btn">
@@ -1395,18 +1467,18 @@ textarea.form-control { resize: vertical; min-height: 110px; }
         <p style="font-size:12px; color:var(--muted);" id="countLabel">12 resultados</p>
       </div>
       <div class="tramites-grid" id="tramitesPageGrid">
-        <div class="tramite-card" data-type="tramite" data-title="calificaciones semi cursados" onclick="openTramiteModal('calificaciones-semi')"><p class="tramite-type">Trámite</p><h5 class="tramite-title">Calificaciones semi cursados</h5><a class="tramite-link">Solicitar →</a></div>
-        <div class="tramite-card" data-type="tramite" data-title="icetex apoyo financiero" onclick="openTramiteModal('icetex')"><p class="tramite-type">Trámite</p><h5 class="tramite-title">ICETEX — Apoyo financiero</h5><a class="tramite-link">Solicitar →</a></div>
-        <div class="tramite-card" data-type="tramite" data-title="cancelación asignaturas" onclick="openTramiteModal('cancelacion-asignaturas')"><p class="tramite-type">Trámite</p><h5 class="tramite-title">Cancelación de asignaturas</h5><a class="tramite-link">Solicitar →</a></div>
-        <div class="tramite-card" data-type="tramite" data-title="transferencia interna" onclick="openTramiteModal('transferencia-interna')"><p class="tramite-type">Trámite</p><h5 class="tramite-title">Transferencia interna</h5><a class="tramite-link">Solicitar →</a></div>
-        <div class="tramite-card" data-type="tramite" data-title="validación títulos extranjeros" onclick="openTramiteModal('validacion-titulos')"><p class="tramite-type">Trámite</p><h5 class="tramite-title">Validación de títulos extranjeros</h5><a class="tramite-link">Solicitar →</a></div>
-        <div class="tramite-card" data-type="tramite" data-title="reingreso programa académico" onclick="openTramiteModal('reingreso')"><p class="tramite-type">Trámite</p><h5 class="tramite-title">Reingreso al programa académico</h5><a class="tramite-link">Solicitar →</a></div>
-        <div class="tramite-card" data-type="certificado" data-title="matriculado dedicación semanal" onclick="openTramiteModal('cert-matriculado')"><p class="tramite-type">Certificado</p><h5 class="tramite-title">Matriculado dedicación semanal</h5><a class="tramite-link">Descargar →</a></div>
-        <div class="tramite-card" data-type="certificado" data-title="notas calificaciones oficiales" onclick="openTramiteModal('cert-notas')"><p class="tramite-type">Certificado</p><h5 class="tramite-title">Notas y calificaciones oficiales</h5><a class="tramite-link">Descargar →</a></div>
-        <div class="tramite-card" data-type="certificado" data-title="paz salvo académico" onclick="openTramiteModal('cert-paz-salvo')"><p class="tramite-type">Certificado</p><h5 class="tramite-title">Paz y salvo académico</h5><a class="tramite-link">Descargar →</a></div>
-        <div class="tramite-card" data-type="certificado" data-title="carta presentación entidades" onclick="openTramiteModal('cert-carta')"><p class="tramite-type">Certificado</p><h5 class="tramite-title">Carta de presentación a entidades</h5><a class="tramite-link">Descargar →</a></div>
-        <div class="tramite-card" data-type="certificado" data-title="constancia estudiante activo" onclick="openTramiteModal('cert-constancia')"><p class="tramite-type">Certificado</p><h5 class="tramite-title">Constancia de estudiante activo</h5><a class="tramite-link">Descargar →</a></div>
-        <div class="tramite-card" data-type="certificado" data-title="historia académica completa" onclick="openTramiteModal('cert-historia')"><p class="tramite-type">Certificado</p><h5 class="tramite-title">Historia académica completa</h5><a class="tramite-link">Descargar →</a></div>
+        <div class="tramite-card" data-type="tramite" data-title="calificaciones semi cursados" onclick="openTramiteModal('calificaciones-semi')"><p class="tramite-type">Trámite</p><h3 class="tramite-title">Calificaciones semi cursados</h3><a class="tramite-link">Solicitar →</a></div>
+        <div class="tramite-card" data-type="tramite" data-title="icetex apoyo financiero" onclick="openTramiteModal('icetex')"><p class="tramite-type">Trámite</p><h3 class="tramite-title">ICETEX — Apoyo financiero</h3><a class="tramite-link">Solicitar →</a></div>
+        <div class="tramite-card" data-type="tramite" data-title="cancelación asignaturas" onclick="openTramiteModal('cancelacion-asignaturas')"><p class="tramite-type">Trámite</p><h3 class="tramite-title">Cancelación de asignaturas</h3><a class="tramite-link">Solicitar →</a></div>
+        <div class="tramite-card" data-type="tramite" data-title="transferencia interna" onclick="openTramiteModal('transferencia-interna')"><p class="tramite-type">Trámite</p><h3 class="tramite-title">Transferencia interna</h3><a class="tramite-link">Solicitar →</a></div>
+        <div class="tramite-card" data-type="tramite" data-title="validación títulos extranjeros" onclick="openTramiteModal('validacion-titulos')"><p class="tramite-type">Trámite</p><h3 class="tramite-title">Validación de títulos extranjeros</h3><a class="tramite-link">Solicitar →</a></div>
+        <div class="tramite-card" data-type="tramite" data-title="reingreso programa académico" onclick="openTramiteModal('reingreso')"><p class="tramite-type">Trámite</p><h3 class="tramite-title">Reingreso al programa académico</h3><a class="tramite-link">Solicitar →</a></div>
+        <div class="tramite-card" data-type="certificado" data-title="matriculado dedicación semanal" onclick="openTramiteModal('cert-matriculado')"><p class="tramite-type">Certificado</p><h3 class="tramite-title">Matriculado dedicación semanal</h3><a class="tramite-link">Descargar →</a></div>
+        <div class="tramite-card" data-type="certificado" data-title="notas calificaciones oficiales" onclick="openTramiteModal('cert-notas')"><p class="tramite-type">Certificado</p><h3 class="tramite-title">Notas y calificaciones oficiales</h3><a class="tramite-link">Descargar →</a></div>
+        <div class="tramite-card" data-type="certificado" data-title="paz salvo académico" onclick="openTramiteModal('cert-paz-salvo')"><p class="tramite-type">Certificado</p><h3 class="tramite-title">Paz y salvo académico</h3><a class="tramite-link">Descargar →</a></div>
+        <div class="tramite-card" data-type="certificado" data-title="carta presentación entidades" onclick="openTramiteModal('cert-carta')"><p class="tramite-type">Certificado</p><h3 class="tramite-title">Carta de presentación a entidades</h3><a class="tramite-link">Descargar →</a></div>
+        <div class="tramite-card" data-type="certificado" data-title="constancia estudiante activo" onclick="openTramiteModal('cert-constancia')"><p class="tramite-type">Certificado</p><h3 class="tramite-title">Constancia de estudiante activo</h3><a class="tramite-link">Descargar →</a></div>
+        <div class="tramite-card" data-type="certificado" data-title="historia académica completa" onclick="openTramiteModal('cert-historia')"><p class="tramite-type">Certificado</p><h3 class="tramite-title">Historia académica completa</h3><a class="tramite-link">Descargar →</a></div>
       </div>
     </div>
   </div>
@@ -1520,6 +1592,8 @@ textarea.form-control { resize: vertical; min-height: 110px; }
   </div>
 </div>
 
+</main>
+
 <!-- FABs -->
 <div class="fab-stack">
   <button class="fab-btn fab-wa" onclick="window.open('https://wa.me/576042619500','_blank')">
@@ -1539,6 +1613,17 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 <script>
 // ── NAV ──
 const navMap = { home:'navHome', inscripcion:'navIns', tramites:'navTra', contacto:'navCon' };
+
+// SEO: títulos y metadescripciones por sección
+const pageMeta = {
+  home:       { title: 'Admisiones EAFIT Medellín 2026 | Inscripciones Pregrado y Posgrado',         desc: 'Realiza tu inscripción a pregrado o posgrado en la Universidad EAFIT, Medellín. Consulta programas, calendario académico 2026, trámites y certificados en línea.' },
+  inscripcion:{ title: 'Inscripción y Matrícula | Admisiones EAFIT 2026',                             desc: 'Conoce el proceso de inscripción y matrícula en la Universidad EAFIT para pregrado y posgrado. Fechas, requisitos y pasos detallados.' },
+  pregrado:   { title: 'Programas de Pregrado EAFIT Medellín 2026 | Oferta Académica',                desc: 'Explora todos los programas de pregrado de la Universidad EAFIT: ingenierías, administración, derecho, ciencias, música y más. Presencial y virtual.' },
+  posgrado:   { title: 'Programas de Posgrado EAFIT | Especializaciones, Maestrías y Doctorados',     desc: 'Encuentra especializaciones, maestrías y doctorados en la Universidad EAFIT Medellín. Formación de alto nivel para profesionales.' },
+  tramites:   { title: 'Trámites y Certificados Académicos | EAFIT Admisiones',                       desc: 'Solicita en línea tus certificados, paz y salvos, constancias y trámites académicos en la Universidad EAFIT. Rápido y sin filas.' },
+  contacto:   { title: 'Contacto y Consultas | Admisiones y Registro EAFIT',                          desc: 'Comunícate con la Oficina de Admisiones y Registro de la Universidad EAFIT. Resuelve tus dudas sobre inscripciones, certificados y más.' }
+};
+
 function gotoPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-' + id).classList.add('active');
@@ -1546,7 +1631,46 @@ function gotoPage(id) {
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   const el = document.getElementById(navMap[id]);
   if (el) el.classList.add('active');
+
+  // SEO: actualizar URL con hash, título y metadescripción al navegar
+  const hash = id === 'home' ? '' : '#' + id;
+  history.pushState({ page: id }, '', window.location.pathname + hash);
+  const meta = pageMeta[id] || pageMeta.home;
+  document.title = meta.title;
+  const descTag = document.querySelector('meta[name="description"]');
+  if (descTag) descTag.setAttribute('content', meta.desc);
+  const ogTitle = document.querySelector('meta[property="og:title"]');
+  if (ogTitle) ogTitle.setAttribute('content', meta.title);
+  const ogDesc = document.querySelector('meta[property="og:description"]');
+  if (ogDesc) ogDesc.setAttribute('content', meta.desc);
+  const twTitle = document.querySelector('meta[name="twitter:title"]');
+  if (twTitle) twTitle.setAttribute('content', meta.title);
+  const twDesc = document.querySelector('meta[name="twitter:description"]');
+  if (twDesc) twDesc.setAttribute('content', meta.desc);
 }
+
+// SEO: soporte para navegación con botón Atrás/Adelante del navegador
+window.addEventListener('popstate', function(e) {
+  const id = (e.state && e.state.page) ? e.state.page : 'home';
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  const el = document.getElementById(navMap[id]);
+  if (el) el.classList.add('active');
+  const meta = pageMeta[id] || pageMeta.home;
+  document.title = meta.title;
+  const descTag = document.querySelector('meta[name="description"]');
+  if (descTag) descTag.setAttribute('content', meta.desc);
+});
+
+// SEO: leer hash de la URL al cargar la página (deep linking)
+(function initFromHash() {
+  const hash = window.location.hash.replace('#', '');
+  const validPages = ['home', 'inscripcion', 'pregrado', 'posgrado', 'tramites', 'contacto'];
+  if (hash && validPages.includes(hash)) {
+    gotoPage(hash);
+  }
+})();
 
 // ── MENU ──
 function openMenu() { document.getElementById('sideMenu').classList.add('open'); document.getElementById('overlay').classList.add('open'); document.body.style.overflow = 'hidden'; }
